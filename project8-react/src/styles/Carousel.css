@@ -1,0 +1,19 @@
+.client-carousel {
+    padding: 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .carousel {
+    display: flex;
+    overflow: auto;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .carousel-item {
+    min-width: 300px;
+    background: #e0e0e0;
+    padding: 1rem;
+    border-radius: 8px;
+  }  

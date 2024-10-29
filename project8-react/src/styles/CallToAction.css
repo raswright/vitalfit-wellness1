@@ -1,0 +1,15 @@
+.call-to-action {
+    padding: 2rem;
+    background-color: #ffefef;
+    text-align: center;
+  }
+  
+  .cta-button3 {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+  }  
