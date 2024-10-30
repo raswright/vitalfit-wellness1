@@ -1,0 +1,284 @@
+/* Our Mission (About Us Page) */ 
+.mission-section {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px 0;
+}
+
+.mission-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.mission-section p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 30px auto; 
+    line-height: 1.6; 
+}
+
+/* Our Mission Images (About Us Page) */
+.mission-images {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 950px;
+    margin-top: 30px;
+    margin-right: 0px;
+}
+
+.mission-section {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    word-wrap: break-word;
+}
+
+.mission-image {
+    margin-top: -270px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--carousel-overlay-color);
+}
+
+/* Founding Story Styling (About Us Page) */
+.mission-section.founding-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+h1 { 
+    text-align: center;
+    margin-bottom: -70px;
+    color:white
+}
+
+.founding-section .text-left,
+.founding-section .text-right {
+    flex: 1;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+.founding-section .text-left { 
+    margin-bottom: -20px;
+}
+
+.founding-section .text-right {
+    margin-bottom: -20px;
+}
+
+.founding-section .founding-image {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.founding-section .founding-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Social Media Section (About Us Page) */
+.social-media {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px var(--carousel-overlay-color)
+}
+
+/* Contact Section (About Us Page) */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-section {
+    text-align: center; 
+    margin: 0 auto; 
+    margin-right: 30px;
+}
+
+.contact-section p {
+    margin: 0 auto; 
+    margin-left: 15px;
+}
+
+.contact-section h2 {
+    margin-right: 472px;
+}
+
+.contact-form label {
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    padding: 15px;
+    border: 1px solid var(--light-grey-text);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    width: 110%;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 150px;
+}
+
+.submit-button {
+    margin-left: 65px;
+    padding: 15px 20px;
+    background-color: var(--schedule-bg2);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.submit-button:hover {
+    background-color: var(--primary-color);
+}
+
+/* Responsive Design (About Us Page) */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .about-images {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .about-image {
+        width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .social-icons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .social-icon {
+        margin-bottom: 10px;
+    }
+
+    .contact-section {
+        padding: 20px;
+    }
+
+    .contact-form {
+        max-width: 100%; 
+    }
+
+    .contact-form label {
+        font-size: 1rem;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        font-size: 1rem;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* Responsive Design - Mission/Founding Story (About Us Page) */
+@media (max-width: 768px) {
+    .mission-images {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+        margin-top: 20px; 
+    }
+
+    .mission-image {
+        margin-top: 0px; 
+        width: 150px; 
+        height: auto;
+    }
+
+    .mission-section p {
+        max-width: 90%; 
+        margin: 0 auto;
+    }
+
+    .mission-section.founding-section {
+        flex-direction: column;
+    }
+
+    .founding-section .text-left,
+    .founding-section .text-right,
+    .founding-section .founding-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .founding-section .founding-image img {
+        max-width: 80%; 
+    }
+
+    .founding-section .text-left,
+    .founding-section .text-right {
+        text-align: left; 
+    }
+    .contact-form {
+        text-align: center;
+    }
+}
+
+/* Responsive Design - Contact Us Form (About Us Page) */
+@media (max-width: 480px) {
+    .contact-form {
+        width: 100%; /* Full width for very small screens */
+        padding: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 14px; /* Adjust text size for small screens */
+    }
+
+    .contact-form button {
+        font-size: 16px;
+    }
+}

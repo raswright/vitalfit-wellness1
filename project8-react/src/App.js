@@ -8,7 +8,11 @@ import Carousel from './components/Carousel';
 import WhyChooseUs from './components/WhyChooseUs';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
-import Services from './components/Services'; // Updated import
+import Services from './components/Services';
+import SchedulePage from './components/Schedule';
+import BlogPage from './components/Blog'; 
+import AboutPage from './components/About';
+
 
 const HomePage = () => (
   <>
@@ -26,7 +30,10 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<Services />} /> {/* Updated route */}
+        <Route path="/services" element={<Services />} /> 
+        <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/blog" element={<BlogPage />} /> 
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
     </Router>

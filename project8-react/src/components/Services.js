@@ -106,10 +106,7 @@ const ServicesPage = () => {
           </div>
         </section>
       </main>
-
-      <footer>
-        <p>&copy; 2024 VitalFit & Wellness. All rights reserved.</p>
-      </footer>
+      
     </div>
   );
 };

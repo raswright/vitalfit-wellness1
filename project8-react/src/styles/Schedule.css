@@ -1,0 +1,106 @@
+/* Tables Styling (Schedule Page)*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+    text-align: left;
+    color: var(--gray-text);
+}
+
+table tr {
+    background-color: lightgray;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid var(--carousel-overlay-color);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+/* Button Styles (Schedule Page) */
+.preview-btn1, .preview-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.preview-btn1 {
+    background-color: var(--schedule-bg2);
+}
+
+.preview-btn {
+    background-color: var(--schedule-bg1);
+}
+
+.book-btn {
+    background-color: var(--text-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Booked State Styling (Schedule Page) */
+.booked {
+    color: var(--warning-color);
+    font-weight: bold;
+    background-color: var(--light-red-bg);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.booked::before {
+    content: " X ";
+}
+
+/* Button Hover Effects (Schedule Page) */
+.preview-btn1:hover, .preview-btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* Individual Class Sections (Schedule Page) */
+.class-section {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.yoga {
+    background-color: var(--schedule-bg2); 
+}
+
+.pilates, .cycling, .bodypump {
+    background-color: var(--schedule-bg1); 
+}
+
+.running, .zumba {
+    background-color: var(--schedule-bg2); 
+}
+
+/* Responsive Design (Schedule Page) */
+@media (max-width: 768px) {
+    table th, table td {
+        font-size: 12px;
+        padding: 3px;
+    }
+
+    .preview-btn, .preview-btn1 {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
