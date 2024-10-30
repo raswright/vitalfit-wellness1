@@ -1,27 +1,78 @@
+/* Header Styling */
 header {
-  background-color: #fff;
-  padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 20px 0;
+  text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #333;
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
 }
 
-.nav-menu {
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
+/* Navigation Styling */
+nav ul {
+  list-style-type: none;
   padding: 0;
 }
 
-.nav-menu li a {
-  text-decoration: none;
-  color: #333;
-  padding: 0.5rem;
+nav ul li {
+  display: inline;
+  margin: 0 15px;
 }
 
-.hamburger {
-  display: none; /* Later, show this on small screens with media queries */
+nav ul li a {
+  color: var(--secondary-color); 
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+nav ul li a:hover {
+  color: var(--button-hover-color);
+}
+
+/* Small Screen Styling */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger-menu span {
+  width: 30px;
+  height: 3px;
+  background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+  }
+  
+  .nav-links li a {
+    padding: 10px;
+    font-size: 1.5rem;
+  }
+  
+  #menu-toggle:checked + .nav-links {
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin: 20px 0;
+  }
+  
+  .nav-links li a {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+  }
 }

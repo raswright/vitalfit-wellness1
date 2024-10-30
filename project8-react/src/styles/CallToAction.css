@@ -1,15 +1,31 @@
+/* Call-to-Action Section */
 .call-to-action {
-    padding: 2rem;
-    background-color: #ffefef;
-    text-align: center;
-  }
-  
-  .cta-button3 {
-    background-color: #ff6b6b;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    display: inline-block;
-  }  
+  text-align: center;
+  padding: 40px;
+  background-color: var(--schedule-bg2);
+  color: var(--text-color);
+}
+
+.call-to-action h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.call-to-action p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.cta-button3 {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button3:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}

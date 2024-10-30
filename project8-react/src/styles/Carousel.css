@@ -1,19 +1,31 @@
+/* Client Success Stories Carousel */
 .client-carousel {
-    padding: 2rem;
-    background-color: #fff;
-    text-align: center;
-  }
-  
-  .carousel {
-    display: flex;
-    overflow: auto;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .carousel-item {
-    min-width: 300px;
-    background: #e0e0e0;
-    padding: 1rem;
-    border-radius: 8px;
-  }  
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--schedule-bg1);
+  border-radius: 10px;
+  max-width: 50%;
+  box-shadow: 0 4px 8px var(--hero-overlay-color);
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item {
+  flex: 1;
+  padding: 15px;
+  font-size: 1.2em;
+  background-color: var(--schedule-bg2);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px var(--carousel-overlay-color);
+  margin: 0 10px;
+}
+
+.carousel-item:not(:first-child) {
+  display: none; 
+}

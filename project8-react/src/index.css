@@ -1,0 +1,34 @@
+/* Global Variables */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #ecf0f1;
+    --accent-color: #3498db;
+    --text-color: #333;
+    --light-gray: #f4f4f4;
+    --warning-color: red;
+    --light-red-bg: #ffe6e6;
+    --white: #fff;
+    --light-grey-text: #eaeaea;
+    --gray-text: #555;
+    --button-hover-color: #6fafd7;
+    --dashed-border-color: var(--primary-color);
+    --schedule-bg1: #62627f;
+    --schedule-bg2: #68939a;
+    --hero-overlay-color: rgba(44, 62, 80, 0.7); 
+    --carousel-overlay-color: rgba(0, 0, 0, 0.1);
+    --midgray: var(--light-gray);
+  }
+  
+  /* Global Body Styles */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+  
+  /* Button Hover Effect */
+  a:hover {
+    cursor: pointer;
+  }  
