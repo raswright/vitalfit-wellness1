@@ -1,0 +1,182 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+/* Header Styling */
+header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    color: var(--button-hover-color);
+}
+
+/* Services Section Styling */
+.services-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 50px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.service-item {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    width: 100%; 
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Icon inside the service-item */
+.service-item img.service-icon {
+    width: 100%;
+    border-radius: 10px;
+    max-width: 250px;
+    height: auto;
+}
+
+/* Additional information displayed on hover */
+.service-item .more-info {
+    display: none;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover effects */
+.service-item:hover .more-info {
+    display: flex;
+    opacity: 1;
+}
+
+.service-item:hover img.service-icon {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+/* Service hover images */
+.service-item .more-info img {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Headings and text inside service items */
+.service-item h3 {
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.service-item p {
+    font-size: 0.9rem;
+    margin-bottom: -10px;
+}
+
+/* Individual adjustments for service items */
+.service-item.mental-health h3,
+.service-item.outdoor h3 {
+    margin-top: 15px;
+}
+
+.service-item.mental-health:hover h3 {
+    margin-bottom: 0px;
+    font-size: 1.1rem;
+}
+
+.service-item.mental-health p,
+.service-item.outdoor p {
+    margin-bottom: 30px;
+    font-size: 1.0rem;
+}
+
+.service-item.outdoor:hover h3,
+.service-item.mental-health:hover img {
+    margin-top: -25px;
+}
+
+/* Background colors based on service type */
+.fitness { background-color: var(--schedule-bg1); }
+.wellness { background-color: var(--schedule-bg2); }
+.nutrition { background-color: var(--schedule-bg1); }
+.personal-training { background-color: var(--schedule-bg2); }
+.group-classes { background-color: var(--schedule-bg2); }
+.meditation { background-color: var(--schedule-bg1); }
+.mental-health { background-color: var(--schedule-bg2); }
+.outdoor { background-color: var(--schedule-bg1); }
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .services-section {
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+    }
+
+    .service-item {
+        width: 90%;
+        margin: 0 auto 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-section {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .service-item {
+        padding: 15px;
+        box-sizing: border-box;
+    }
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 10px 0;
+}
