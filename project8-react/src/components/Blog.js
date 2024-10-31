@@ -1,6 +1,13 @@
 // src/components/BlogPage.js
 import React from 'react';
-import '../styles/Blog.css'; // Ensure to create and use a CSS file for styles
+import '../styles/Blog.css';
+
+// Import images directly
+import Blog1 from '../assets/images/blog1.jpg';
+import Blog2 from '../assets/images/blog2.jpg';
+import BlogFood from '../assets/images/blogfood.jpg';
+import MentalHealth1 from '../assets/images/mentalhealth1.jpg';
+import Drinking from '../assets/images/drinking.jpg';
 
 const Blog = () => {
   return (
@@ -9,7 +16,7 @@ const Blog = () => {
         {/* Featured Blog Post Section */}
         <section className="featured-post">
           <img
-            src={require('../assets/images/blog1.jpg').default} 
+            src={Blog1}
             width="500"
             height="400"
             alt="Featured Post"
@@ -38,7 +45,7 @@ const Blog = () => {
 
           {/* Blog Post Components */}
           <BlogPost
-            imgSrc={require('../assets/images/blog2.jpg').default}
+            imgSrc={Blog2}
             title="12 exercise benefits to encourage a workout routine"
             content="Physical activity is about more than just flexing your muscles. Strength training at the gym, a brisk walk around
               the neighborhood, or a high-intensity aerobic workout in your living room positively benefits the rest of your day..."
@@ -47,7 +54,7 @@ const Blog = () => {
           />
 
           <BlogPost
-            imgSrc={require('../assets/images/blogfood.jpg').default}
+            imgSrc={BlogFood}
             title="25 Simple Tips to Make Your Diet Healthier"
             content="You can eat healthier by making a few swaps, such as choosing whole grains over refined grains and eating more protein.
               A diet rich in fruits and vegetables has been scientifically proven to provide numerous health benefits..."
@@ -57,7 +64,7 @@ const Blog = () => {
           />
 
           <BlogPost
-            imgSrc={require('../assets/images/mentalhealth1.jpg').default}
+            imgSrc={MentalHealth1}
             title="How to look after your mental health using exercise"
             content="There are many reasons why physical activity is good for your body - having a healthy heart and improving your joints and bones are
               just two, but did you know that physical activity is also beneficial for your mental health and well-being?"
@@ -66,7 +73,7 @@ const Blog = () => {
           />
 
           <BlogPost
-            imgSrc={require('../assets/images/drinking.jpg').default}
+            imgSrc={Drinking}
             title="Staying Hydrated, Staying Healthy"
             content="When the temperatures rise, getting enough water is important whether you're playing sports, traveling, or just sitting in the sun.
               It's critical for your heart health. Drinking enough water keeps the body hydrated, which helps the heart more easily pump blood..."
@@ -105,7 +112,6 @@ const Blog = () => {
           <div id="quiz-result"></div>
         </section>
       </main>
-
     </div>
   );
 };

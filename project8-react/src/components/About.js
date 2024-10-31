@@ -1,6 +1,13 @@
 // src/components/AboutPage.js
 import React from 'react';
-import '../styles/About.css'; // Import the AboutPage styles
+import '../styles/About.css';
+
+import AboutUs1 from '../assets/images/AboutUs1.jpg';
+import AboutUs2 from '../assets/images/AboutUs2.jpg';
+import FoundingStory from '../assets/images/FoundingStory.jpg';
+import IGLogo from '../assets/images/iglogo.png';
+import XLogo from '../assets/images/xlogo.png';
+import TikTokLogo from '../assets/images/tiktoklogo.png';
 
 const About = () => {
   return (
@@ -21,20 +28,8 @@ const About = () => {
 
         {/* Image Placeholder Section */}
         <section className="mission-images">
-          <img
-            src={require('../assets/images/About Us 1.jpg').default}
-            alt="About us Image 1"
-            width="250"
-            height="300"
-            className="mission-image"
-          />
-          <img
-            src={require('../assets/images/About Us 2.jpg').default}
-            alt="About us Image 2"
-            width="250"
-            height="300"
-            className="mission-image"
-          />
+          <img src={AboutUs1} alt="About us Image 1" width="270" height="200" className="mission-image" />
+          <img src={AboutUs2} alt="About us Image 2" width="270" height="200" className="mission-image" />
         </section>
 
         {/* Founding Story Section */}
@@ -49,10 +44,7 @@ const About = () => {
           </div>
 
           <div className="founding-image">
-            <img
-              src={require('../assets/images/FoundingStory.jpg').default}
-              alt="Founder Image"
-            />
+            <img src={FoundingStory} alt="Founder Image" />
           </div>
 
           <div className="text-right">
@@ -69,31 +61,13 @@ const About = () => {
           <h2>Follow Us</h2>
           <div className="social-icons">
             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-              <img
-                src={require('../assets/images/iglogo.png').default}
-                width="40"
-                height="40"
-                alt="Instagram Icon"
-                className="social-icon"
-              />
+              <img src={IGLogo} width="40" height="40" alt="Instagram Icon" className="social-icon" />
             </a>
             <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
-              <img
-                src={require('../assets/images/xlogo.png').default}
-                width="40"
-                height="40"
-                alt="X Icon"
-                className="social-icon"
-              />
+              <img src={XLogo} width="40" height="40" alt="X Icon" className="social-icon" />
             </a>
             <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
-              <img
-                src={require('../assets/images/tiktoklogo.png').default}
-                width="40"
-                height="40"
-                alt="Tiktok Icon"
-                className="social-icon"
-              />
+              <img src={TikTokLogo} width="40" height="40" alt="Tiktok Icon" className="social-icon" />
             </a>
           </div>
         </section>
@@ -141,4 +115,4 @@ const About = () => {
   );
 };
 
-export default About
+export default About;
