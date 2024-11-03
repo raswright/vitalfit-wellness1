@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 950px;
+    gap: 850px;
     margin-top: 30px;
     margin-right: 0px;
 }
@@ -36,6 +36,9 @@
 }
 
 .mission-image {
+    width: 45%;
+    max-width: 300px;
+    height: auto;
     margin-top: -270px;
     border-radius: 10px;
     box-shadow: 0 5px 10px var(--carousel-overlay-color);
@@ -44,12 +47,14 @@
 /* Founding Story Styling (About Us Page) */
 .mission-section.founding-section {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: var(--primary-color);
     padding: 30px;
     margin-bottom: 40px;
 }
+
 
 h1 { 
     text-align: center;
@@ -82,8 +87,7 @@ h1 {
 }
 
 .founding-section .founding-image img {
-    max-width: 100%;
-    height: auto;
+    max-width: 30%;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
@@ -120,7 +124,7 @@ h1 {
 .contact-section {
     text-align: center; 
     margin: 0 auto; 
-    margin-right: 30px;
+    padding: 20px;
 }
 
 .contact-section p {
@@ -129,7 +133,17 @@ h1 {
 }
 
 .contact-section h2 {
-    margin-right: 472px;
+    text-align: center; 
+    margin: 0 auto 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto; 
+    text-align: center;
 }
 
 .contact-form label {
@@ -144,7 +158,8 @@ h1 {
     border: 1px solid var(--light-grey-text);
     border-radius: 5px;
     font-size: 1.2rem;
-    width: 110%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .contact-form textarea {
@@ -153,7 +168,6 @@ h1 {
 }
 
 .submit-button {
-    margin-left: 65px;
     padding: 15px 20px;
     background-color: var(--schedule-bg2);
     color: white;
@@ -161,11 +175,14 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     font-size: 1.2rem;
+    margin: 10px auto 0 auto ;
+    display: block;
 }
 
 .submit-button:hover {
     background-color: var(--primary-color);
 }
+
 
 /* Responsive Design (About Us Page) */
 @media (max-width: 768px) {
@@ -200,12 +217,20 @@ h1 {
         padding: 20px;
     }
 
+    .contact-section h2 {
+        text-align: center; /* Ensures header is centered */
+        margin: 0 auto 20px;
+    }
+
     .contact-form {
-        max-width: 100%; 
+        max-width: 90%; 
+        padding: 0 10px;
+        margin: 0 auto; /* Centers the form */
     }
 
     .contact-form label {
         font-size: 1rem;
+        text-align: left;
     }
 
     .contact-form input[type="text"],
@@ -214,11 +239,13 @@ h1 {
         font-size: 1rem;
         padding: 8px;
         width: 100%;
+        margin: 0 auto;
     }
 
     .submit-button {
         font-size: 1rem;
         padding: 10px;
+        margin: 10px auto 0 auto; /* Centers the submit button */
     }
 }
 
@@ -244,6 +271,12 @@ h1 {
 
     .mission-section.founding-section {
         flex-direction: column;
+        text-align: center; /* Center-aligns content */
+    }
+
+    .founding-section h2 {
+        text-align: center; /* Centers the header */
+        margin-bottom: 20px;
     }
 
     .founding-section .text-left,
@@ -255,30 +288,28 @@ h1 {
 
     .founding-section .founding-image img {
         max-width: 80%; 
-    }
-
-    .founding-section .text-left,
-    .founding-section .text-right {
-        text-align: left; 
-    }
-    .contact-form {
-        text-align: center;
+        margin: 0 auto; /* Centers the image */
     }
 }
 
-/* Responsive Design - Contact Us Form (About Us Page) */
+/* Extra Small Screens (Mobile Phones) */
 @media (max-width: 480px) {
+    .contact-section h2 {
+        font-size: 1.5rem; /* Adjusts the title size for very small screens */
+    }
+
     .contact-form {
-        width: 100%; /* Full width for very small screens */
+        width: 100%;
         padding: 15px;
     }
 
     .contact-form input,
     .contact-form textarea {
-        font-size: 14px; /* Adjust text size for small screens */
+        font-size: 14px; /* Smaller font size for very small screens */
     }
 
-    .contact-form button {
-        font-size: 16px;
+    .submit-button {
+        font-size: 1rem;
+        padding: 10px;
     }
 }

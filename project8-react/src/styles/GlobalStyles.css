@@ -93,3 +93,27 @@
         font-size: 0.9rem; 
     }
 }
+
+/* Stops horizontal scrolling */
+body, html {
+    overflow-x: hidden;
+}
+
+.container, .main-content, .wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+footer {
+    margin-top: 35px;
+}
+
+footer p {
+    color: white;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

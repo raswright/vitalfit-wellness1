@@ -30,7 +30,7 @@ const ServicesPage = () => {
             <h3>Fitness Programs</h3>
             <img src={fitness1} alt="Fitness Icon" className="service-icon" />
             <div className="more-info">
-              <p>Achieve your health goals with personalized training and group classes for you.</p>
+              <p>Achieve your health goals with personalized training & group classes.</p>
               <img src={fitness2} alt="Fitness Programs" className="service-hover-image" />
             </div>
           </div>
@@ -40,7 +40,7 @@ const ServicesPage = () => {
             <h3>Wellness Coaching</h3>
             <img src={virtual1} alt="Wellness Icon" className="service-icon" />
             <div className="more-info">
-              <p>Connect with expert coaches for personalized fitness, nutrition, and mental well-being guidance from home.</p>
+              <p>Connect with coaches for custom fitness, nutrition, etc. all from home.</p>
               <img src={virtual2} alt="Wellness Coaching" className="service-hover-image" />
             </div>
           </div>
@@ -90,7 +90,7 @@ const ServicesPage = () => {
             <h3>Mental Health Workshops</h3>
             <img src={mentalWorkshop1} alt="Mental Health Icon" className="service-icon" />
             <div className="more-info">
-              <p>Workshops to help you manage stress and improve mental well-being.</p>
+              <p>Workshops to help you manage stress.</p>
               <img src={mentalWorkshop2} alt="Mental Health Workshops" className="service-hover-image" />
             </div>
           </div>

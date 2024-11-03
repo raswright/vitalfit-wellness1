@@ -108,7 +108,14 @@ nav ul li a:hover {
 /* Headings and text inside service items */
 .service-item h3 {
     font-size: 1.2rem;
+    position: relative; 
+    z-index: 2;
+}
+
+.service-item:hover h3 {
     position: relative;
+    top: -30px; /* Adjust this value to move it up only on hover */
+    z-index: 2;
 }
 
 .service-item p {
@@ -116,27 +123,6 @@ nav ul li a:hover {
     margin-bottom: -10px;
 }
 
-/* Individual adjustments for service items */
-.service-item.mental-health h3,
-.service-item.outdoor h3 {
-    margin-top: 15px;
-}
-
-.service-item.mental-health:hover h3 {
-    margin-bottom: 0px;
-    font-size: 1.1rem;
-}
-
-.service-item.mental-health p,
-.service-item.outdoor p {
-    margin-bottom: 30px;
-    font-size: 1.0rem;
-}
-
-.service-item.outdoor:hover h3,
-.service-item.mental-health:hover img {
-    margin-top: -25px;
-}
 
 /* Background colors based on service type */
 .fitness { background-color: var(--schedule-bg1); }
@@ -159,6 +145,16 @@ nav ul li a:hover {
         width: 90%;
         margin: 0 auto 20px;
     }
+
+    /* Adjust title font size and positioning */
+    .service-item h3 {
+        font-size: 1.1rem; 
+        top: 0; 
+    }
+
+    .service-item:hover h3 {
+        top: -35px; /* Adjust top position when hovered */
+    }
 }
 
 @media (max-width: 480px) {
@@ -170,6 +166,22 @@ nav ul li a:hover {
     .service-item {
         padding: 15px;
         box-sizing: border-box;
+    }
+
+    /* Further adjust title font size and spacing */
+    .service-item h3 {
+        font-size: 1.3rem; /* Smaller font size */
+        margin-top: 10px; /* Increase top margin for better separation */
+        top: 20; /* Ensure no overlap */
+    }
+
+    .service-item:hover h3 {
+        top: 1px; /* Adjust top positioning when hovered */
+    }
+
+    /* Adjust padding around service item to prevent crowding */
+    .service-item .more-info {
+        padding: 8px;
     }
 }
 

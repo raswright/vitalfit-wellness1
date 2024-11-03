@@ -76,6 +76,7 @@ const About = () => {
         <section className="contact-section">
           <h2>Contact Us</h2>
           <p>Feel free to reach out with any questions. We're here to support your wellness journey.</p>
+          <br></br>
           <form id="contactForm" className="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="1e6479b5-6604-4cbc-b29d-ac281be3a8f1" />
 
@@ -94,22 +95,6 @@ const About = () => {
           </form>
         </section>
 
-        {/* Google Map Embed */}
-        <section className="map-section">
-          <h2>Find Us Here</h2>
-          <div className="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.4827305415437!2d-81.03300358478043!3d33.99622098062317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8bc9440b319d1%3A0xe81ff4f14b2cb0d6!2sUniversity%20of%20South%20Carolina!5e0!3m2!1sen!2sus!4v1638891160546!5m2!1sen!2sus"
-              width="400"
-              height="450"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Map Location"
-            />
-          </div>
-        </section>
       </main>
     </div>
   );
