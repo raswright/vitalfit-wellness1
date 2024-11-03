@@ -1,5 +1,5 @@
-// Header (All Pages)
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import '../styles/Header.css';
 
 const Header = () => {
@@ -9,11 +9,11 @@ const Header = () => {
       <label htmlFor="hamburger-checkbox" className="hamburger">&#9776;</label>
       <nav className="small-nav">
         <ul id="nav-menu" className="nav-menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/schedule">Schedule</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/about">About Us</a></li>
+          <li><Link to="/">Home</Link></li> 
+          <li><Link to="/services">Services</Link></li> 
+          <li><Link to="/schedule">Schedule</Link></li> 
+          <li><Link to="/blog">Blog</Link></li> 
+          <li><Link to="/about">About Us</Link></li> 
         </ul>
       </nav>
     </header>
