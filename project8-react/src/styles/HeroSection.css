@@ -1,4 +1,4 @@
-    /* Hero Section */
+/* Hero Section */
 .hero {
     background-image: url('../assets/images/main-logo-home.jpg');
     background-size: cover;
@@ -46,7 +46,7 @@
     background-color: var(--primary-color);
   }
   
-  /* Responsive Design */
+  /* Responsive Design (Home Page) */
   @media (max-width: 768px) {
     .hero h2 {
       font-size: 2rem;
@@ -61,4 +61,3 @@
       height: 300px; 
     }
   }
-  

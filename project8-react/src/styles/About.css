@@ -55,11 +55,14 @@
     margin-bottom: 40px;
 }
 
-
 h1 { 
     text-align: center;
     margin-bottom: -70px;
     color:white
+}
+
+.founding-section h2 {
+    color: white; 
 }
 
 .founding-section .text-left,
@@ -183,7 +186,6 @@ h1 {
     background-color: var(--primary-color);
 }
 
-
 /* Responsive Design (About Us Page) */
 @media (max-width: 768px) {
     nav ul li {
@@ -218,14 +220,14 @@ h1 {
     }
 
     .contact-section h2 {
-        text-align: center; /* Ensures header is centered */
+        text-align: center; 
         margin: 0 auto 20px;
     }
 
     .contact-form {
         max-width: 90%; 
         padding: 0 10px;
-        margin: 0 auto; /* Centers the form */
+        margin: 0 auto; 
     }
 
     .contact-form label {
@@ -245,7 +247,7 @@ h1 {
     .submit-button {
         font-size: 1rem;
         padding: 10px;
-        margin: 10px auto 0 auto; /* Centers the submit button */
+        margin: 10px auto 0 auto; 
     }
 }
 
@@ -271,11 +273,11 @@ h1 {
 
     .mission-section.founding-section {
         flex-direction: column;
-        text-align: center; /* Center-aligns content */
+        text-align: center; 
     }
 
     .founding-section h2 {
-        text-align: center; /* Centers the header */
+        text-align: center; 
         margin-bottom: 20px;
     }
 
@@ -288,14 +290,14 @@ h1 {
 
     .founding-section .founding-image img {
         max-width: 80%; 
-        margin: 0 auto; /* Centers the image */
+        margin: 0 auto; 
     }
 }
 
 /* Extra Small Screens (Mobile Phones) */
 @media (max-width: 480px) {
     .contact-section h2 {
-        font-size: 1.5rem; /* Adjusts the title size for very small screens */
+        font-size: 1.5rem; 
     }
 
     .contact-form {
@@ -305,7 +307,7 @@ h1 {
 
     .contact-form input,
     .contact-form textarea {
-        font-size: 14px; /* Smaller font size for very small screens */
+        font-size: 14px; 
     }
 
     .submit-button {

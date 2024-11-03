@@ -1,8 +1,7 @@
-// src/components/BlogPage.js
 import React from 'react';
 import '../styles/Blog.css';
 
-// Import images directly
+//Import images
 import Blog1 from '../assets/images/blog1.jpg';
 import Blog2 from '../assets/images/blog2.jpg';
 import BlogFood from '../assets/images/blogfood.jpg';

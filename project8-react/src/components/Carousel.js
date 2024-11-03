@@ -1,4 +1,4 @@
-// src/components/Carousel.js
+//  Part of Home Page (index)
 import React from 'react';
 import '../styles/Carousel.css';
 

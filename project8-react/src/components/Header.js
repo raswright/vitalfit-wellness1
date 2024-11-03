@@ -1,4 +1,4 @@
-// src/components/Header.js
+// Header (All Pages)
 import React from 'react';
 import '../styles/Header.css';
 

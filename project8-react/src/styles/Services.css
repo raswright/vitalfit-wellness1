@@ -59,7 +59,6 @@ nav ul li a:hover {
     cursor: pointer;
 }
 
-/* Icon inside the service-item */
 .service-item img.service-icon {
     width: 100%;
     border-radius: 10px;
@@ -67,7 +66,7 @@ nav ul li a:hover {
     height: auto;
 }
 
-/* Additional information displayed on hover */
+/* Hover effect (Services Page) */
 .service-item .more-info {
     display: none;
     color: var(--text-color);
@@ -85,7 +84,6 @@ nav ul li a:hover {
     transition: opacity 0.3s ease;
 }
 
-/* Hover effects */
 .service-item:hover .more-info {
     display: flex;
     opacity: 1;
@@ -96,7 +94,6 @@ nav ul li a:hover {
     transform: scale(1.1);
 }
 
-/* Service hover images */
 .service-item .more-info img {
     width: 90%;
     height: auto;
@@ -105,7 +102,7 @@ nav ul li a:hover {
     border-radius: 8px;
 }
 
-/* Headings and text inside service items */
+/* Headings/Text Inside Service Items Styling */
 .service-item h3 {
     font-size: 1.2rem;
     position: relative; 
@@ -114,7 +111,7 @@ nav ul li a:hover {
 
 .service-item:hover h3 {
     position: relative;
-    top: -30px; /* Adjust this value to move it up only on hover */
+    top: -30px; 
     z-index: 2;
 }
 
@@ -123,8 +120,7 @@ nav ul li a:hover {
     margin-bottom: -10px;
 }
 
-
-/* Background colors based on service type */
+/* Individual Colors (Services Page) */
 .fitness { background-color: var(--schedule-bg1); }
 .wellness { background-color: var(--schedule-bg2); }
 .nutrition { background-color: var(--schedule-bg1); }
@@ -134,7 +130,7 @@ nav ul li a:hover {
 .mental-health { background-color: var(--schedule-bg2); }
 .outdoor { background-color: var(--schedule-bg1); }
 
-/* Responsive design adjustments */
+/* Responsive Design (Services Page) */
 @media (max-width: 768px) {
     .services-section {
         grid-template-columns: 1fr 1fr;
@@ -145,15 +141,13 @@ nav ul li a:hover {
         width: 90%;
         margin: 0 auto 20px;
     }
-
-    /* Adjust title font size and positioning */
     .service-item h3 {
         font-size: 1.1rem; 
         top: 0; 
     }
 
     .service-item:hover h3 {
-        top: -35px; /* Adjust top position when hovered */
+        top: -35px; 
     }
 }
 
@@ -168,18 +162,16 @@ nav ul li a:hover {
         box-sizing: border-box;
     }
 
-    /* Further adjust title font size and spacing */
     .service-item h3 {
-        font-size: 1.3rem; /* Smaller font size */
-        margin-top: 10px; /* Increase top margin for better separation */
-        top: 20; /* Ensure no overlap */
+        font-size: 1.3rem; 
+        margin-top: 10px; 
+        top: 20; 
     }
 
     .service-item:hover h3 {
-        top: 1px; /* Adjust top positioning when hovered */
+        top: 1px; 
     }
 
-    /* Adjust padding around service item to prevent crowding */
     .service-item .more-info {
         padding: 8px;
     }

@@ -1,4 +1,4 @@
-// src/components/Footer.js
+// Footer (All Pages)
 import React from 'react';
 import '../styles/Footer.css';
 

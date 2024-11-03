@@ -1,8 +1,7 @@
-// src/components/ServicesPage.js
 import React from 'react';
-import '../styles/Services.css'; // Import CSS styles
+import '../styles/Services.css'; 
 
-// Import images for each service
+//Import images
 import fitness1 from '../assets/images/fitness1.jpg';
 import fitness2 from '../assets/images/fitness2.jpg';
 import virtual1 from '../assets/images/virtual1.jpg';

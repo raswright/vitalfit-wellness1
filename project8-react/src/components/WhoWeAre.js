@@ -1,8 +1,10 @@
-// src/components/WhoWeAre.js
+//  Part of Home Page (index)
 import React from 'react';
-import '../styles/WhoWeAre.css'; // Import the CSS for this component
-import whoweare1 from '../assets/images/whoweare1.jpg'; // Import the first image
-import whoweare2 from '../assets/images/whoweare2.jpg'; // Import the second image
+import '../styles/WhoWeAre.css'; 
+
+//Import Images
+import whoweare1 from '../assets/images/whoweare1.jpg'; 
+import whoweare2 from '../assets/images/whoweare2.jpg'; 
 
 const WhoWeAre = () => {
   return (

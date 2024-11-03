@@ -1,6 +1,5 @@
-// src/components/SchedulePage.js
 import React from 'react';
-import '../styles/Schedule.css'; // Ensure to create and use a CSS file for styles
+import '../styles/Schedule.css'; 
 
 const Schedule = () => {
   return (

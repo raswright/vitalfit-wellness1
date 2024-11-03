@@ -1,3 +1,4 @@
+//  Part of Home Page (index)
 import React from 'react';
 import '../styles/HeroSection.css';
 

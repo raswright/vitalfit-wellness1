@@ -1,7 +1,6 @@
-// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'; // Importing global styles
+import './index.css'; 
 import App from './App';
 import './styles/GlobalStyles.css';
 

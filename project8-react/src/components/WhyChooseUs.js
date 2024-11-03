@@ -1,8 +1,11 @@
-// src/components/WhyChooseUs.js
+//  Part of Home Page (index)
+
 import React from 'react';
 import '../styles/WhyChooseUs.css';
-import whychooseus1 from '../assets/images/whychooseus1.jpg'; // Import the first image
-import whychooseus2 from '../assets/images/whychooseus2.jpg'; // Import the second image
+
+//Import Images
+import whychooseus1 from '../assets/images/whychooseus1.jpg'; 
+import whychooseus2 from '../assets/images/whychooseus2.jpg'; 
 
 const WhyChooseUs = () => {
   return (

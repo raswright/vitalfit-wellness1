@@ -33,7 +33,7 @@
   max-width: 100%;
 }
 
-/* Responsive Design */
+/* Responsive Design (Home Page) */
 @media (max-width: 768px) {
   .whoweare-images {
     flex-direction: column; 

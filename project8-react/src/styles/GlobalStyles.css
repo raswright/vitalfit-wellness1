@@ -47,26 +47,6 @@
     }
 }
 
-/* Google Maps Styling (About us Page)*/
-.map-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 300px;
-    max-width: 600px;
-    border: 0;
-    margin-left: 40px;
-}
-
-.map-section {
-    margin-left: 35px;
-}
-
 /* Responsive Design (About Us Page) */
 @media (max-width: 768px) {
     .map-container iframe {

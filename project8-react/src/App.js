@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
@@ -12,7 +11,6 @@ import Services from './components/Services';
 import SchedulePage from './components/Schedule';
 import BlogPage from './components/Blog'; 
 import AboutPage from './components/About';
-
 
 const HomePage = () => (
   <>

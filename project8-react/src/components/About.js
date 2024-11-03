@@ -1,7 +1,7 @@
-// src/components/AboutPage.js
 import React from 'react';
 import '../styles/About.css';
 
+//Import images
 import AboutUs1 from '../assets/images/AboutUs1.jpg';
 import AboutUs2 from '../assets/images/AboutUs2.jpg';
 import FoundingStory from '../assets/images/FoundingStory.jpg';
