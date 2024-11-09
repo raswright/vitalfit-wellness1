@@ -217,7 +217,7 @@ const ClassSection = ({ title, className, scheduleData, jsonData = [], previewSt
                     <p>Location: {jsonData[index].location}</p>
                     <p>Extra Info: {jsonData[index].extra_info.join(', ')}</p>
                     <img
-                      src={`images/${jsonData[index].img_name}`}
+                      src={`https://vitalfit-wellness-server.onrender.com/images/${jsonData[index].img_name}`}
                       alt={jsonData[index].class_name}
                       style={{ width: '150px', height: 'auto' }}
                     />
