@@ -10,6 +10,29 @@ import yoga5 from '../assets/images/yoga5.jpg';
 import pilates1 from '../assets/images/pilates1.jpg';
 import pilates2 from '../assets/images/pilates2.jpg';
 import pilates3 from '../assets/images/pilates3.jpg';
+import pilates4 from '../assets/images/pilates4.jpg';
+import pilates5 from '../assets/images/pilates5.jpg';
+import running1 from '../assets/images/running1.jpg';
+import running2 from '../assets/images/running2.jpg';
+import running3 from '../assets/images/running3.jpg';
+import running4 from '../assets/images/running4.jpg';
+import running5 from '../assets/images/running5.jpg';
+import cycling1 from '../assets/images/cycling1.jpg';
+import cycling2 from '../assets/images/cycling2.jpg';
+import cycling3 from '../assets/images/cycling3.jpg';
+import cycling4 from '../assets/images/cycling4.jpg';
+import cycling5 from '../assets/images/cycling5.jpg';
+import cycling6 from '../assets/images/cycling6.jpg';
+import zumba1 from '../assets/images/zumba1.jpg';
+import zumba2 from '../assets/images/zumba2.jpg';
+import zumba3 from '../assets/images/zumba3.jpg';
+import zumba4 from '../assets/images/zumba4.jpg';
+import bodypump1 from '../assets/images/bodypump1.jpg';
+import bodypump2 from '../assets/images/bodypump2.jpg';
+import bodypump3 from '../assets/images/bodypump3.jpg';
+import bodypump4 from '../assets/images/bodypump4.jpg';
+import bodypump5 from '../assets/images/bodypump5.jpg';
+import bodypump6 from '../assets/images/bodypump6.jpg';
 
 const imageMap = {
   yoga1,
@@ -20,6 +43,29 @@ const imageMap = {
   pilates1,
   pilates2,
   pilates3,
+  pilates4,
+  pilates5,
+  running1,
+  running2,
+  running3, 
+  running4,
+  running5,
+  cycling1,
+  cycling2,
+  cycling3,
+  cycling4,
+  cycling5,
+  cycling6,
+  zumba1,
+  zumba2,
+  zumba3,
+  zumba4,
+  bodypump1,
+  bodypump2,
+  bodypump3,
+  bodypump4,
+  bodypump5,
+  bodypump6,
 };
 
 const Schedule = () => {
