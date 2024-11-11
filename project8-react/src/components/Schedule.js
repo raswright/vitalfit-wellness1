@@ -73,11 +73,11 @@ const Schedule = () => {
   const [previewStates, setPreviewStates] = useState({});
 
   useEffect(() => {
-    // Fetch JSON data from the server
+
     fetch('https://vitalfit-wellness-server.onrender.com/api/classes')
       .then((response) => response.json())
       .then((data) => {
-        // Convert array to object with class names as keys for quick lookup
+
         const dataObj = {};
         data.forEach((item) => {
           if (!dataObj[item.class_name]) dataObj[item.class_name] = [];
@@ -210,72 +210,89 @@ const Schedule = () => {
   );
 };
 
-const ClassSection = ({ title, className, scheduleData, jsonData = [], previewStates, togglePreview }) => (
-  <section className={`class-section ${className}`}>
-    <h2>{title}</h2>
-    <table className="booking-table">
-      <thead>
-        <tr>
-          <th>Class</th>
-          <th>Day</th>
-          <th>Time</th>
-          <th>Instructor(s)</th>
-          <th>Preview</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {scheduleData.map((item, index) => (
-          <React.Fragment key={`${className}-${index}`}>
-            <tr>
-              <td>{item.class}</td>
-              <td>{item.day}</td>
-              <td>{item.time}</td>
-              <td>{item.instructor}</td>
-              <td>
-                {item.isBooked ? (
-                  <span className="booked">Booked</span>
-                ) : (
+const ClassSection = ({ title, className, scheduleData, jsonData = [], previewStates, togglePreview }) => {
+
+  const [bookedStates, setBookedStates] = useState(
+    scheduleData && scheduleData.length > 0
+      ? scheduleData.reduce((acc, item, index) => ({ ...acc, [index]: item.isBooked || false }), {})
+      : {}
+  );
+
+  const toggleBooking = (index) => {
+    setBookedStates((prev) => ({
+      ...prev,
+      [index]: !prev[index], 
+    }));
+  };
+
+  return (
+    <section className={`class-section ${className}`}>
+      <h2>{title}</h2>
+      <table className="booking-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Instructor(s)</th>
+            <th>Preview</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scheduleData.map((item, index) => (
+            <React.Fragment key={`${className}-${index}`}>
+              <tr>
+                <td>{item.class}</td>
+                <td>{item.day}</td>
+                <td>{item.time}</td>
+                <td>{item.instructor}</td>
+                <td>
+                  {item.isBooked ? (
+                    <span className="booked">Booked</span>
+                  ) : (
+                    <button
+                      className="preview-btn"
+                      onClick={() => togglePreview(className, index)}
+                    >
+                      {previewStates[`${className}-${index}`] ? 'Unpreview' : 'Preview'}
+                    </button>
+                  )}
+                </td>
+                <td>
                   <button
-                    className="preview-btn"
-                    onClick={() => togglePreview(className, index)}
+                    className={`book-btn ${bookedStates[index] ? 'booked' : ''}`}
+                    onClick={() => toggleBooking(index)}
                   >
-                    {previewStates[`${className}-${index}`] ? 'Unpreview' : 'Preview'}
+                    {bookedStates[index] ? 'Booked' : 'Book Now'}
                   </button>
-                )}
-              </td>
-              <td>
-                {item.isBooked ? (
-                  <span className="booked">Booked</span>
-                ) : (
-                  <button className="book-btn">Book Now</button>
-                )}
-              </td>
-            </tr>
-            {previewStates[`${className}-${index}`] && jsonData[index] && (
-              <tr className="class-details">
-                <td colSpan="6">
-                  <div>
-                    <h3>{jsonData[index].class_name}</h3>
-                    <p>Confirmation Number: {jsonData[index].confirmation_number}</p>
-                    <p>Instructor Level: {jsonData[index].instructor_level}</p>
-                    <p>Availability: {jsonData[index].availability}</p>
-                    <p>Location: {jsonData[index].location}</p>
-                    <p>Extra Info: {jsonData[index].extra_info.join(', ')}</p>
-                    <img
-                      src={`https://vitalfit-wellness-server.onrender.com/images/${jsonData[index].img_name}`}
-                      alt={jsonData[index].class_name}
-                      style={{ width: '150px', height: 'auto' }}
-                    />
-                  </div>
                 </td>
               </tr>
-            )}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
-  </section>
-);
+              {previewStates[`${className}-${index}`] && jsonData[index] && (
+                <tr className="class-details">
+                  <td colSpan="6">
+                    <div>
+                      <h3>{jsonData[index].class_name}</h3>
+                      <p>Confirmation Number: {jsonData[index].confirmation_number}</p>
+                      <p>Instructor Level: {jsonData[index].instructor_level}</p>
+                      <p>Availability: {jsonData[index].availability}</p>
+                      <p>Location: {jsonData[index].location}</p>
+                      <p>Extra Info: {jsonData[index].extra_info.join(', ')}</p>
+                      <img
+                        src={`https://vitalfit-wellness-server.onrender.com/images/${jsonData[index].img_name}`}
+                        alt={jsonData[index].class_name}
+                        style={{ width: '150px', height: 'auto' }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+};
 
 export default Schedule;

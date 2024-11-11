@@ -11,9 +11,10 @@
 
 .carousel {
   display: flex;
-  overflow: hidden;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .carousel-item {
@@ -24,8 +25,13 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px var(--carousel-overlay-color);
   margin: 0 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  width: 100%;
 }
 
-.carousel-item:not(:first-child) {
-  display: none; 
+.carousel-item.active {
+  opacity: 1;
+  position: static;
 }
