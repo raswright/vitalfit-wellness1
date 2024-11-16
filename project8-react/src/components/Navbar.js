@@ -25,6 +25,7 @@ const Navbar = () => {
             <li><Link to="/schedule" onClick={toggleMenu}>Schedule</Link></li>
             <li><Link to="/blog" onClick={toggleMenu}>Blog</Link></li>
             <li><Link to="/about" onClick={toggleMenu}>About Us</Link></li>
+            <li><Link to="/new-data" onClick={toggleMenu}>Class Request</Link></li>
           </ul>
         </nav>
       </div>

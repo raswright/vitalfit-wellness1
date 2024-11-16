@@ -1,0 +1,73 @@
+/* Styles for the individual ServiceItem component */
+
+.service-item {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.service-item img.service-icon {
+    width: 100%;
+    border-radius: 10px;
+    max-width: 250px;
+    height: auto;
+}
+
+.service-item .more-info {
+    display: none;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-item:hover .more-info {
+    display: flex;
+    opacity: 1;
+}
+
+.service-item:hover img.service-icon {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.service-item .more-info img {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.service-item h3 {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.service-item:hover h3 {
+    position: relative;
+    top: -30px;
+    z-index: 2;
+}
+
+.service-item p {
+    font-size: 0.9rem;
+    margin-bottom: -10px;
+}

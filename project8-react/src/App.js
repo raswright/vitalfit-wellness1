@@ -11,6 +11,7 @@ import Services from './components/Services';
 import SchedulePage from './components/Schedule';
 import BlogPage from './components/Blog';
 import AboutPage from './components/About';
+import NewDataPage from './components/NewDataPage';
 
 const HomePage = () => (
   <>
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/new-data" element={<NewDataPage/>} /> 
       </Routes>
       <Footer />
     </Router>
