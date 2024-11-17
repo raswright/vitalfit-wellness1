@@ -1,19 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 
 const Header = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false); 
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <header>
       <h1>Vitalfit & Wellness</h1>
-      <label htmlFor="hamburger-checkbox" className="hamburger">&#9776;</label>
-      <nav className="small-nav">
-        <ul id="nav-menu" className="nav-menu">
-          <li><Link to="/">Home</Link></li> 
-          <li><Link to="/services">Services</Link></li> 
-          <li><Link to="/schedule">Schedule</Link></li> 
-          <li><Link to="/blog">Blog</Link></li> 
-          <li><Link to="/about">About Us</Link></li> 
+      <button
+        className="hamburger"
+        onClick={toggleNav}
+        aria-label="Toggle navigation"
+      >
+        &#9776;
+      </button>
+      <nav className={`small-nav ${isNavOpen ? 'open' : ''}`}>
+        <ul className="nav-menu">
+          <li><Link to="/" onClick={() => setIsNavOpen(false)}>Home</Link></li>
+          <li><Link to="/services" onClick={() => setIsNavOpen(false)}>Services</Link></li>
+          <li><Link to="/schedule" onClick={() => setIsNavOpen(false)}>Schedule</Link></li>
+          <li><Link to="/blog" onClick={() => setIsNavOpen(false)}>Blog</Link></li>
+          <li><Link to="/about" onClick={() => setIsNavOpen(false)}>About Us</Link></li>
         </ul>
       </nav>
     </header>

@@ -1,7 +1,8 @@
 import React from 'react';
 import '../styles/About.css';
+import ContactForm from '../components/ContactForm'; 
 
-//Import images
+// Import images
 import AboutUs1 from '../assets/images/AboutUs1.jpg';
 import AboutUs2 from '../assets/images/AboutUs2.jpg';
 import FoundingStory from '../assets/images/FoundingStory.jpg';
@@ -50,8 +51,7 @@ const About = () => {
           <div className="text-right">
             <p>
               What began as a small local gym has grown into a holistic wellness platform, offering fitness training,
-              mental health support, and nutrition coaching. Today, VitalFit & Wellness remains true to its mission—
-              helping individuals lead healthier, more balanced lives through a comprehensive approach to wellness.
+              mental health support, and nutrition coaching. Today, VitalFit & Wellness remains true to its mission—helping individuals lead healthier, more balanced lives through a comprehensive approach to wellness.
             </p>
           </div>
         </section>
@@ -72,29 +72,10 @@ const About = () => {
           </div>
         </section>
 
-        {/* Contact Us Section */}
+        {/* Contact Form Section */}
         <section className="contact-section">
-          <h2>Contact Us</h2>
-          <p>Feel free to reach out with any questions. We're here to support your wellness journey.</p>
-          <br></br>
-          <form id="contactForm" className="contact-form" action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="1e6479b5-6604-4cbc-b29d-ac281be3a8f1" />
-
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your name" />
-
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email" />
-
-            <label htmlFor="message">Message:</label>
-            <textarea id="message" name="message" required placeholder="Enter your message"></textarea>
-
-            <input type="submit" value="Send Message" className="submit-button" />
-            <p id="formSuccess" style={{ color: 'rgb(17, 120, 17)', display: 'none' }}>Thank you! Your message was sent successfully.</p>
-            <p id="formError" style={{ color: 'red', display: 'none' }}>Error! Please fill out correctly.</p>
-          </form>
+          <ContactForm />
         </section>
-
       </main>
     </div>
   );
