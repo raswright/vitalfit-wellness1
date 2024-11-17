@@ -53,26 +53,21 @@
   .new-data-page button {
     width: 100%;
     padding: 10px;
-    background-color: var(--button-bg);
+    background-color: var(--text-color);
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .new-data-page button:hover {
-    background-color: var(--button-hover-color);
+    background-color: var(--primary-color);
+    color: white
+
   }
-  
-  .new-data-page .error {
-    display: block;
-    color: var(--warning-color);
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
+
   .new-data-page .message {
     text-align: center;
     margin-top: 15px;
@@ -173,4 +168,113 @@ legend {
     margin-bottom: 10px;
 }
 
+.error {
+  display: block; 
+  color: var(--warning-color); 
+  font-size: 14px;
+  margin-top: 5px; 
+  font-weight: bold; 
+  line-height: 1.2; 
+}
 
+/* Responsive Design for Class Request Section */
+@media (max-width: 768px) {
+  .new-data-page {
+      padding: 15px;
+      max-width: 95%; 
+  }
+
+  .new-data-page h2 {
+      font-size: 1.5rem; 
+  }
+
+  .new-data-page form {
+      gap: 10px; 
+  }
+
+  .new-data-page button {
+      font-size: 0.9rem;
+      padding: 10px; 
+  }
+
+  .recap-box {
+      padding: 10px; 
+  }
+
+  .recap-box h3 {
+      font-size: 1.2rem; 
+  }
+}
+
+@media (max-width: 480px) {
+  .new-data-page {
+      padding: 10px;
+      max-width: 100%; 
+  }
+
+  .new-data-page h2 {
+      font-size: 1.3rem; 
+  }
+
+  .new-data-page input,
+  .new-data-page select,
+  .new-data-page textarea {
+      font-size: 0.9rem; 
+      padding: 8px;
+  }
+
+  .new-data-page button {
+      font-size: 0.8rem;
+      padding: 8px; 
+  }
+
+  .recap-box {
+      font-size: 0.9rem; 
+      padding: 8px;
+  }
+}
+
+/* Default styles for decorative images */
+.decorative-image {
+  position: absolute;
+  width: 350px;
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.decorative-image.left-side {
+  left: -400px; 
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.decorative-image.right-side {
+  right: -400px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Adjust for medium resolutions */
+@media (max-width: 768px) {
+  .decorative-image {
+      position: relative; 
+      width: 250px; 
+      margin: 10px auto; 
+      display: block;
+  }
+
+  .decorative-image.left-side,
+  .decorative-image.right-side {
+      left: 0;
+      right: 0;
+      top: auto;
+      transform: none;
+  }
+}
+
+/* Adjust for small resolutions */
+@media (max-width: 480px) {
+  .decorative-image {
+      width: 200px; 
+  }
+}

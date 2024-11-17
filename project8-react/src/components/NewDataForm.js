@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 
 const NewDataForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    className: '',
-    classType: '',
-    customClassType: '',
+    classType: '',  
     preferredDayTime: '',
-    groupType: '',
-    instructorPreference: 'Any',
-    specificInstructor: '',
-    comments: '',
+    groupType: '', 
+    instructorPreference: '', 
   });
 
   const [errors, setErrors] = useState({});
@@ -22,6 +18,9 @@ const NewDataForm = ({ onSubmit }) => {
     }
     if (!formData.preferredDayTime) newErrors.preferredDayTime = 'Preferred Day/Time is required.';
     if (!formData.groupType) newErrors.groupType = 'Group Type is required.';
+    if (!formData.instructorPreference) {
+      newErrors.instructorPreference = 'Instructor Preference is required.';
+    }
     return newErrors;
   };
 
@@ -32,22 +31,26 @@ const NewDataForm = ({ onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate the form
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
+
+    // Clear errors and submit
     setErrors({});
     const response = await onSubmit(formData);
+
+    // Reset the form on successful submission
     if (response.success) {
       setFormData({
-        className: '',
         classType: '',
         customClassType: '',
         preferredDayTime: '',
         groupType: '',
-        instructorPreference: 'Any',
-        specificInstructor: '',
+        instructorPreference: '',
         comments: '',
       });
     }
@@ -55,6 +58,7 @@ const NewDataForm = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Class Type */}
       <label>
         Class Type:
         <select name="classType" value={formData.classType} onChange={handleChange}>
@@ -70,6 +74,7 @@ const NewDataForm = ({ onSubmit }) => {
         {errors.classType && <span className="error">{errors.classType}</span>}
       </label>
 
+      {/* Custom Class Type */}
       {formData.classType === 'Other' && (
         <label>
           Please Specify:
@@ -84,6 +89,7 @@ const NewDataForm = ({ onSubmit }) => {
         </label>
       )}
 
+      {/* Preferred Day/Time */}
       <label>
         Preferred Day/Time:
         <input
@@ -96,69 +102,75 @@ const NewDataForm = ({ onSubmit }) => {
         {errors.preferredDayTime && <span className="error">{errors.preferredDayTime}</span>}
       </label>
 
+      {/* Group Type */}
       <fieldset>
         <legend>Group Type:</legend>
         <div className="radio-options">
-        <label>
-          <input
-            type="radio"
-            name="groupType"
-            value="One-on-One"
-            checked={formData.groupType === 'One-on-One'}
-            onChange={handleChange}
-          />
-          One-on-One
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="groupType"
-            value="Group"
-            checked={formData.groupType === 'Group'}
-            onChange={handleChange}
-          />
-          Group
-        </label>
+          <label>
+            <input
+              type="radio"
+              name="groupType"
+              value="One-on-One"
+              checked={formData.groupType === 'One-on-One'}
+              onChange={handleChange}
+            />
+            One-on-One
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="groupType"
+              value="Group"
+              checked={formData.groupType === 'Group'}
+              onChange={handleChange}
+            />
+            Group
+          </label>
         </div>
-        
+        {errors.groupType && <span className="error">{errors.groupType}</span>}
       </fieldset>
 
+      {/* Instructor Preference */}
       <fieldset>
-      <div className="radio-options">
         <legend>Instructor Preference:</legend>
-        <label>
-          <input
-            type="radio"
-            name="instructorPreference"
-            value="Any"
-            checked={formData.instructorPreference === 'Any'}
-            onChange={handleChange}
-          />
-          Any
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="instructorPreference"
-            value="Female"
-            checked={formData.instructorPreference === 'Female'}
-            onChange={handleChange}
-          />
-          Female
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="instructorPreference"
-            value="Male"
-            checked={formData.instructorPreference === 'Male'}
-            onChange={handleChange}
-          />
-          Male
-        </label>
+        <div className="radio-options">
+          <label>
+            <input
+              type="radio"
+              name="instructorPreference"
+              value="Any"
+              checked={formData.instructorPreference === 'Any'}
+              onChange={handleChange}
+            />
+            Any
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="instructorPreference"
+              value="Female"
+              checked={formData.instructorPreference === 'Female'}
+              onChange={handleChange}
+            />
+            Female
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="instructorPreference"
+              value="Male"
+              checked={formData.instructorPreference === 'Male'}
+              onChange={handleChange}
+            />
+            Male
+          </label>
         </div>
+        {errors.instructorPreference && (
+          <span className="error">{errors.instructorPreference}</span>
+        )}
       </fieldset>
 
+      {/* Comments */}
       <label>
         Comments:
         <textarea
@@ -169,6 +181,7 @@ const NewDataForm = ({ onSubmit }) => {
         />
       </label>
 
+      {/* Submit Button */}
       <button type="submit">Submit</button>
     </form>
   );
