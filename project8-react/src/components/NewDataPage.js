@@ -12,7 +12,7 @@ const NewDataPage = () => {
   // Function to handle the form submission
   const handleFormSubmit = async (formData) => {
     try {
-      const response = await fetch('http://localhost:4000/api/classes', {
+      const response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
