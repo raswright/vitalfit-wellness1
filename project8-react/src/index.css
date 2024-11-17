@@ -17,6 +17,10 @@
     --hero-overlay-color: rgba(44, 62, 80, 0.7); 
     --carousel-overlay-color: rgba(0, 0, 0, 0.1);
     --midgray: var(--light-gray);
+    --navy: #004080;
+    --navy1: 0 0 8px rgba(0, 102, 204, 0.5);
+    --lightgray: #ccc;
+    --lightwhite: #ddd;
   }
   
   /* Global Body Styles */

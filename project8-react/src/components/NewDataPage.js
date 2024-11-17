@@ -9,7 +9,6 @@ const NewDataPage = () => {
   const [dataList, setDataList] = useState([]); // manage list of submitted data
   const [recentSubmission, setRecentSubmission] = useState(null); 
 
-  // Function to handle the form submission
   const handleFormSubmit = async (formData) => {
     try {
       const response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {

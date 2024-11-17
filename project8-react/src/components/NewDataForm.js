@@ -32,18 +32,17 @@ const NewDataForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate the form
+    // form validation
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    // Clear errors and submit
     setErrors({});
     const response = await onSubmit(formData);
 
-    // Reset the form on successful submission
+    // resets form after successful submission
     if (response.success) {
       setFormData({
         classType: '',

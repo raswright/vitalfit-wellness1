@@ -36,12 +36,12 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease; 
   }
 
-  /* Hover and Focus States */
+/* Hover Effects */
 .new-data-page input:focus,
 .new-data-page select:focus,
 .new-data-page textarea:focus {
-  border-color: #004080; 
-  box-shadow: 0 0 8px rgba(0, 102, 204, 0.5); 
+  border-color: var(--navy);
+  box-shadow: var(--navy1);
   outline: none; 
 }
   
@@ -107,7 +107,7 @@
 
   fieldset {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--lightgray);
     padding: 15px;
     border-radius: 5px;
   }
@@ -126,7 +126,7 @@
   
   hr {
     border: none;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--lightwhite);
     margin: 20px 0;
   }
   
@@ -177,7 +177,27 @@ legend {
   line-height: 1.2; 
 }
 
-/* Responsive Design for Class Request Section */
+/* Decorative Images Styling */
+.decorative-image {
+  position: absolute;
+  width: 350px;
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.decorative-image.left-side {
+  left: -400px; 
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.decorative-image.right-side {
+  right: -400px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Responsive Design (Class Request) */
 @media (max-width: 768px) {
   .new-data-page {
       padding: 15px;
@@ -234,27 +254,7 @@ legend {
   }
 }
 
-/* Default styles for decorative images */
-.decorative-image {
-  position: absolute;
-  width: 350px;
-  opacity: 1;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.decorative-image.left-side {
-  left: -400px; 
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.decorative-image.right-side {
-  right: -400px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Adjust for medium resolutions */
+/* Responsive Design Images (Class Request) */
 @media (max-width: 768px) {
   .decorative-image {
       position: relative; 
@@ -272,7 +272,6 @@ legend {
   }
 }
 
-/* Adjust for small resolutions */
 @media (max-width: 480px) {
   .decorative-image {
       width: 200px; 
