@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 const NewDataForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     classType: '',  
-    preferredDayTime: '',
+    preferredDayTime: '', 
     groupType: '', 
     instructorPreference: '', 
+    comments: '', 
   });
 
   const [errors, setErrors] = useState({});
@@ -80,7 +81,7 @@ const NewDataForm = ({ onSubmit }) => {
           <input
             type="text"
             name="customClassType"
-            value={formData.customClassType}
+            value={formData.customClassType || ''}
             onChange={handleChange}
             placeholder="Type your class type"
           />
@@ -92,11 +93,11 @@ const NewDataForm = ({ onSubmit }) => {
       <label>
         Preferred Day/Time:
         <input
-          type="text"
+          type="datetime-local" 
           name="preferredDayTime"
           value={formData.preferredDayTime}
           onChange={handleChange}
-          placeholder="E.g., Monday 5 PM"
+          required
         />
         {errors.preferredDayTime && <span className="error">{errors.preferredDayTime}</span>}
       </label>
