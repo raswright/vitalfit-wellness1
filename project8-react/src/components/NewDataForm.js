@@ -41,6 +41,12 @@ const NewDataForm = ({ onSubmit, initialData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Remove `customClassType` if the classType is not 'Other'
+    const filteredFormData = { ...formData };
+    if (filteredFormData.classType !== 'Other') {
+        delete filteredFormData.customClassType;
+    }
+
     // Form validation
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -49,7 +55,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     }
 
     setErrors({});
-    const response = await onSubmit(formData);
+    const response = await onSubmit(filteredFormData);
 
     // Reset form after successful submission if not editing
     if (response.success && !initialData) {
@@ -62,7 +68,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         comments: '',
       });
     }
-  };
+};
 
   return (
     <form onSubmit={handleSubmit}>
