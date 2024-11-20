@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const NewDataForm = ({ onSubmit, initialData }) => {
+const NewDataForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
     classType: '',
     customClassType: '',
@@ -8,22 +8,10 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     groupType: '',
     instructorPreference: '',
     comments: '',
+    ...initialData,
   });
 
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    if (initialData) {
-      setFormData({
-        classType: initialData.classType || '',
-        customClassType: initialData.customClassType || '',
-        preferredDayTime: initialData.preferredDayTime || '',
-        groupType: initialData.groupType || '',
-        instructorPreference: initialData.instructorPreference || '',
-        comments: initialData.comments || '',
-      });
-    }
-  }, [initialData]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -47,18 +35,21 @@ const NewDataForm = ({ onSubmit, initialData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate the form
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      console.log('Validation errors:', formErrors); // Debugging
       return;
     }
 
+    setErrors({});
+    console.log('Submitting data:', formData); // Debugging
     const filteredFormData = { ...formData };
     if (filteredFormData.classType !== 'Other') {
       delete filteredFormData.customClassType;
     }
 
-    setErrors({});
     const response = await onSubmit(filteredFormData);
 
     if (response.success) {
@@ -117,65 +108,61 @@ const NewDataForm = ({ onSubmit, initialData }) => {
 
       <fieldset>
         <legend>Group Type:</legend>
-        <div className="radio-options">
-          <label>
-            <input
-              type="radio"
-              name="groupType"
-              value="One-on-One"
-              checked={formData.groupType === 'One-on-One'}
-              onChange={handleChange}
-            />
-            One-on-One
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="groupType"
-              value="Group"
-              checked={formData.groupType === 'Group'}
-              onChange={handleChange}
-            />
-            Group
-          </label>
-        </div>
+        <label>
+          <input
+            type="radio"
+            name="groupType"
+            value="One-on-One"
+            checked={formData.groupType === 'One-on-One'}
+            onChange={handleChange}
+          />
+          One-on-One
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="groupType"
+            value="Group"
+            checked={formData.groupType === 'Group'}
+            onChange={handleChange}
+          />
+          Group
+        </label>
         {errors.groupType && <span className="error">{errors.groupType}</span>}
       </fieldset>
 
       <fieldset>
         <legend>Instructor Preference:</legend>
-        <div className="radio-options">
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Any"
-              checked={formData.instructorPreference === 'Any'}
-              onChange={handleChange}
-            />
-            Any
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Female"
-              checked={formData.instructorPreference === 'Female'}
-              onChange={handleChange}
-            />
-            Female
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Male"
-              checked={formData.instructorPreference === 'Male'}
-              onChange={handleChange}
-            />
-            Male
-          </label>
-        </div>
+        <label>
+          <input
+            type="radio"
+            name="instructorPreference"
+            value="Any"
+            checked={formData.instructorPreference === 'Any'}
+            onChange={handleChange}
+          />
+          Any
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="instructorPreference"
+            value="Female"
+            checked={formData.instructorPreference === 'Female'}
+            onChange={handleChange}
+          />
+          Female
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="instructorPreference"
+            value="Male"
+            checked={formData.instructorPreference === 'Male'}
+            onChange={handleChange}
+          />
+          Male
+        </label>
         {errors.instructorPreference && <span className="error">{errors.instructorPreference}</span>}
       </fieldset>
 
@@ -189,7 +176,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         />
       </label>
 
-      <button type="submit">{initialData ? 'Edit Now' : 'Submit'}</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
