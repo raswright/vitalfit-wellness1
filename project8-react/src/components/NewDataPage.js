@@ -8,7 +8,7 @@ const NewDataPage = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [dataList, setDataList] = useState([]);
   const [recentSubmission, setRecentSubmission] = useState(null);
-  const [editItemId, setEditItemId] = useState(null); // Track the ID of the item being edited
+  const [editItemId, setEditItemId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,22 +32,26 @@ const NewDataPage = () => {
   const handleFormSubmit = async (formData) => {
     try {
       let response;
+      // Prepare data by removing fields that aren't allowed by the server
+      const filteredData = { ...formData };
+      if (filteredData.classType !== 'Other') {
+        delete filteredData.customClassType; // Remove customClassType if not needed
+      }
+
       if (editItemId) {
-        // Edit existing suggestion
         response = await fetch(
           `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(filteredData),
           }
         );
       } else {
-        // Add new suggestion
         response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(filteredData),
         });
       }
 
@@ -55,19 +59,18 @@ const NewDataPage = () => {
 
       if (response.ok) {
         if (editItemId) {
-          // Update the item in the list
           setDataList((prevList) =>
-            prevList.map((item) => (item.id === editItemId ? { ...item, ...formData } : item))
+            prevList.map((item) => (item.id === editItemId ? { ...item, ...filteredData } : item))
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
-          // Add the new item to the list
           setDataList((prevList) => [...prevList, result.suggestion]);
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
 
-        setEditItemId(null); // Clear edit state
+        setEditItemId(null);
+        setRecentSubmission(null); // Clear edit state
         return { success: true };
       } else {
         setServerMessage(result.message || 'Failed to submit. Try again.');
@@ -103,7 +106,7 @@ const NewDataPage = () => {
   // Handle Edit Click
   const handleEdit = (item) => {
     setEditItemId(item.id);
-    setRecentSubmission(item); // Show the item being edited in the form
+    setRecentSubmission(item); // Populate the form with existing data
   };
 
   return (
