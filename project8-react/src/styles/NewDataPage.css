@@ -197,6 +197,8 @@ legend {
   transform: translateY(-50%);
 }
 
+
+
 /* Responsive Design (Class Request) */
 @media (max-width: 768px) {
   .new-data-page {
