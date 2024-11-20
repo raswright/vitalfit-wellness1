@@ -8,7 +8,8 @@ const NewDataPage = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [dataList, setDataList] = useState([]);
   const [recentSubmission, setRecentSubmission] = useState(null);
-  const [editItemId, setEditItemId] = useState(null);
+  const [editItemId, setEditItemId] = useState(null); // Track the ID of the item being edited
+  const [editFormData, setEditFormData] = useState(null); // Track the form data for editing
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,17 +56,20 @@ const NewDataPage = () => {
 
       if (response.ok) {
         if (editItemId) {
+          // Update the item in the list
           setDataList((prevList) =>
             prevList.map((item) => (item.id === editItemId ? { ...item, ...formData } : item))
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
+          // Add the new item to the list
           setDataList((prevList) => [...prevList, result.suggestion]);
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
 
-        setEditItemId(null);
+        setEditItemId(null); // Clear edit state
+        setEditFormData(null); // Clear the form data for editing
         return { success: true };
       } else {
         setServerMessage(result.message || 'Failed to submit. Try again.');
@@ -98,65 +102,65 @@ const NewDataPage = () => {
     }
   };
 
+  // Handle Edit Click
+  const handleEdit = (item) => {
+    setEditItemId(item.id);
+    setEditFormData(item); // Populate the form data for editing
+  };
+
   return (
     <div className="new-data-page">
       <h2>Suggest a New Class</h2>
-      <NewDataForm
-        onSubmit={handleFormSubmit}
-        initialData={editItemId ? dataList.find((item) => item.id === editItemId) : null}
-      />
+      {!editItemId && <NewDataForm onSubmit={handleFormSubmit} />} {/* Display form if not editing */}
       {serverMessage && <p className="server-message">{serverMessage}</p>}
 
       {/* Recap Box */}
       {recentSubmission && (
         <div className="recap-box">
-          <h3 className="recap-title" style={{ color: 'blue' }}>Your Submission</h3>
-          <div className="recap-content">
-            <p><strong>Class Type:</strong> {recentSubmission.classType}</p>
-            {recentSubmission.customClassType && (
-              <p><strong>Custom Class Type:</strong> {recentSubmission.customClassType}</p>
-            )}
-            <p><strong>Preferred Day/Time:</strong> {recentSubmission.preferredDayTime}</p>
-            <p><strong>Group Type:</strong> {recentSubmission.groupType}</p>
-            <p><strong>Instructor Preference:</strong> {recentSubmission.instructorPreference}</p>
-            {recentSubmission.comments && (
-              <p><strong>Comments:</strong> {recentSubmission.comments}</p>
-            )}
-          </div>
+          <h3>Your Submission</h3>
+          <p><strong>Class Type:</strong> {recentSubmission.classType}</p>
+          {recentSubmission.customClassType && (
+            <p><strong>Custom Class Type:</strong> {recentSubmission.customClassType}</p>
+          )}
+          <p><strong>Preferred Day/Time:</strong> {recentSubmission.preferredDayTime}</p>
+          <p><strong>Group Type:</strong> {recentSubmission.groupType}</p>
+          <p><strong>Instructor Preference:</strong> {recentSubmission.instructorPreference}</p>
+          {recentSubmission.comments && (
+            <p><strong>Comments:</strong> {recentSubmission.comments}</p>
+          )}
         </div>
       )}
 
       {/* List of Submitted Suggestions */}
       <div className="submitted-suggestions">
-        <h3 className="suggestions-title" style={{ color: 'green' }}>Submitted Class Suggestions</h3>
+        <h3>Submitted Class Suggestions</h3>
         {dataList.length > 0 ? (
           <div className="suggestions-grid">
             {dataList.map((item) => (
               <div key={item.id} className="suggestion-card">
-                <div className="suggestion-content">
-                  <p><strong>Class Type:</strong> {item.classType}</p>
-                  {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
-                  <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
-                  <p><strong>Group Type:</strong> {item.groupType}</p>
-                  <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
-                  {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
-                </div>
-                <div className="action-buttons">
-                  <button
-                    className="edit-button"
-                    onClick={() => setEditItemId(item.id)}
-                    style={{ marginRight: '10px', backgroundColor: 'orange' }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(item.id)}
-                    style={{ backgroundColor: 'red', color: 'white' }}
-                  >
-                    Delete
-                  </button>
-                </div>
+                {editItemId === item.id ? (
+                  <NewDataForm
+                    onSubmit={handleFormSubmit}
+                    initialData={editFormData}
+                  />
+                ) : (
+                  <>
+                    <p><strong>Class Type:</strong> {item.classType}</p>
+                    {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
+                    <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
+                    <p><strong>Group Type:</strong> {item.groupType}</p>
+                    <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
+                    {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
+                    <div className="action-buttons">
+                      <button className="edit-button" onClick={() => handleEdit(item)}>
+                        Edit
+                      </button>
+                      <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
