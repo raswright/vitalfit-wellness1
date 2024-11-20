@@ -1,205 +1,160 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/NewDataPage.css';
+import NewDataForm from './NewDataForm';
+import request1 from '../assets/images/request1.jpg';
+import request2 from '../assets/images/request2.jpg';
 
-const NewDataForm = ({ onSubmit, initialData }) => {
-  const [formData, setFormData] = useState({
-    classType: '',
-    customClassType: '',
-    preferredDayTime: '',
-    groupType: '',
-    instructorPreference: '',
-    comments: '',
-  });
-
-  const [errors, setErrors] = useState({});
+const NewDataPage = () => {
+  const [serverMessage, setServerMessage] = useState('');
+  const [dataList, setDataList] = useState([]);
+  const [recentSubmission, setRecentSubmission] = useState(null);
+  const [editItemId, setEditItemId] = useState(null); // Track the ID of the item being edited
 
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        classType: initialData.classType || '',
-        customClassType: initialData.customClassType || '',
-        preferredDayTime: initialData.preferredDayTime || '',
-        groupType: initialData.groupType || '',
-        instructorPreference: initialData.instructorPreference || '',
-        comments: initialData.comments || '',
-      });
-    }
-  }, [initialData]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions');
+        const result = await response.json();
+        if (response.ok) {
+          setDataList(result);
+        } else {
+          console.error('Failed to fetch data:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.classType) newErrors.classType = 'Class Type is required.';
-    if (formData.classType === 'Other' && !formData.customClassType) {
-      newErrors.customClassType = 'Please specify the class type.';
+    fetchData();
+  }, []);
+
+  // Handle form submission (Add or Edit)
+  const handleFormSubmit = async (formData) => {
+    try {
+      let response;
+
+      // Create a copy of formData without `id`
+      const filteredData = { ...formData };
+      delete filteredData.id;
+
+      if (editItemId) {
+        // Edit existing suggestion
+        response = await fetch(
+          `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(filteredData),
+          }
+        );
+      } else {
+        // Add new suggestion
+        response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(filteredData),
+        });
+      }
+
+      const result = await response.json();
+
+      if (response.ok) {
+        if (editItemId) {
+          // Update the item in the list
+          setDataList((prevList) =>
+            prevList.map((item) => (item.id === editItemId ? { ...item, ...filteredData } : item))
+          );
+          setServerMessage('Class suggestion updated successfully!');
+        } else {
+          // Add the new item to the list
+          setDataList((prevList) => [...prevList, result.suggestion]);
+          setRecentSubmission(result.suggestion);
+          setServerMessage('Class suggestion submitted successfully!');
+        }
+
+        setEditItemId(null); // Clear edit state
+        setRecentSubmission(null); // Clear the form data
+        return { success: true };
+      } else {
+        setServerMessage(result.message || 'Failed to submit. Try again.');
+        return { success: false };
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setServerMessage('An error occurred. Please try again.');
+      return { success: false };
     }
-    if (!formData.preferredDayTime) newErrors.preferredDayTime = 'Preferred Day/Time is required.';
-    if (!formData.groupType) newErrors.groupType = 'Group Type is required.';
-    if (!formData.instructorPreference) {
-      newErrors.instructorPreference = 'Instructor Preference is required.';
-    }
-    return newErrors;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  // Handle Delete
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setDataList((prevList) => prevList.filter((item) => item.id !== id));
+        setServerMessage('Class suggestion deleted successfully!');
+      } else {
+        const result = await response.json();
+        setServerMessage(result.message || 'Failed to delete. Try again.');
+      }
+    } catch (error) {
+      console.error('Error deleting suggestion:', error);
+      setServerMessage('An error occurred. Please try again.');
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      return;
-    }
-
-    const filteredFormData = { ...formData };
-    // Remove customClassType if not needed
-    if (filteredFormData.classType !== 'Other') {
-      delete filteredFormData.customClassType;
-    }
-
-    setErrors({});
-    const response = await onSubmit(filteredFormData);
-
-    if (response.success) {
-      setFormData({
-        classType: '',
-        customClassType: '',
-        preferredDayTime: '',
-        groupType: '',
-        instructorPreference: '',
-        comments: '',
-      });
-    }
+  // Handle Edit Click
+  const handleEdit = (item) => {
+    setEditItemId(item.id);
+    setRecentSubmission(item); // Show the item being edited in the form
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Class Type */}
-      <label>
-        Class Type:
-        <select name="classType" value={formData.classType} onChange={handleChange}>
-          <option value="">-- Select Class Type --</option>
-          <option value="Yoga">Yoga</option>
-          <option value="Pilates">Pilates</option>
-          <option value="Running">Running</option>
-          <option value="Cycling">Cycling</option>
-          <option value="Zumba">Zumba</option>
-          <option value="BodyPump">Body Pump</option>
-          <option value="Other">Other</option>
-        </select>
-        {errors.classType && <span className="error">{errors.classType}</span>}
-      </label>
+    <div className="new-data-page">
+      <h2>{editItemId ? 'Edit Your Class Suggestion' : 'Suggest a New Class'}</h2>
+      <NewDataForm
+        onSubmit={handleFormSubmit}
+        initialData={editItemId ? recentSubmission : null}
+      />
+      {serverMessage && <p className="server-message">{serverMessage}</p>}
 
-      {/* Custom Class Type */}
-      {formData.classType === 'Other' && (
-        <label>
-          Please Specify:
-          <input
-            type="text"
-            name="customClassType"
-            value={formData.customClassType}
-            onChange={handleChange}
-            placeholder="Type your class type"
-          />
-          {errors.customClassType && <span className="error">{errors.customClassType}</span>}
-        </label>
-      )}
+      {/* List of Submitted Suggestions */}
+      <div className="submitted-suggestions">
+        <h3>Submitted Class Suggestions</h3>
+        {dataList.length > 0 ? (
+          <div className="suggestions-grid">
+            {dataList.map((item) => (
+              <div key={item.id} className="suggestion-card">
+                <p><strong>Class Type:</strong> {item.classType}</p>
+                {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
+                <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
+                <p><strong>Group Type:</strong> {item.groupType}</p>
+                <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
+                {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
+                <div className="action-buttons">
+                  <button className="edit-button" onClick={() => handleEdit(item)}>
+                    Edit
+                  </button>
+                  <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No class suggestions submitted yet.</p>
+        )}
+      </div>
 
-      {/* Preferred Day/Time */}
-      <label>
-        Preferred Day/Time:
-        <input
-          type="datetime-local"
-          name="preferredDayTime"
-          value={formData.preferredDayTime}
-          onChange={handleChange}
-        />
-        {errors.preferredDayTime && <span className="error">{errors.preferredDayTime}</span>}
-      </label>
-
-      {/* Group Type */}
-      <fieldset>
-        <legend>Group Type:</legend>
-        <div className="radio-options">
-          <label>
-            <input
-              type="radio"
-              name="groupType"
-              value="One-on-One"
-              checked={formData.groupType === 'One-on-One'}
-              onChange={handleChange}
-            />
-            One-on-One
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="groupType"
-              value="Group"
-              checked={formData.groupType === 'Group'}
-              onChange={handleChange}
-            />
-            Group
-          </label>
-        </div>
-        {errors.groupType && <span className="error">{errors.groupType}</span>}
-      </fieldset>
-
-      {/* Instructor Preference */}
-      <fieldset>
-        <legend>Instructor Preference:</legend>
-        <div className="radio-options">
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Any"
-              checked={formData.instructorPreference === 'Any'}
-              onChange={handleChange}
-            />
-            Any
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Female"
-              checked={formData.instructorPreference === 'Female'}
-              onChange={handleChange}
-            />
-            Female
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="instructorPreference"
-              value="Male"
-              checked={formData.instructorPreference === 'Male'}
-              onChange={handleChange}
-            />
-            Male
-          </label>
-        </div>
-        {errors.instructorPreference && <span className="error">{errors.instructorPreference}</span>}
-      </fieldset>
-
-      {/* Comments */}
-      <label>
-        Comments:
-        <textarea
-          name="comments"
-          value={formData.comments}
-          onChange={handleChange}
-          placeholder="Any additional details or reasons"
-        />
-      </label>
-
-      {/* Submit Button */}
-      <button type="submit">{editItemId ? 'Edit Now' : 'Submit'}</button>
-    </form>
+      {/* Decorative Images */}
+      <img src={request1} alt="Decorative Left" className="decorative-image left-side" />
+      <img src={request2} alt="Decorative Right" className="decorative-image right-side" />
+    </div>
   );
 };
 
-export default NewDataForm;
+export default NewDataPage;

@@ -12,10 +12,16 @@ const NewDataForm = ({ onSubmit, initialData }) => {
 
   const [errors, setErrors] = useState({});
 
-  // Populate the form with initial data when editing
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
+      setFormData({
+        classType: initialData.classType || '',
+        customClassType: initialData.customClassType || '',
+        preferredDayTime: initialData.preferredDayTime || '',
+        groupType: initialData.groupType || '',
+        instructorPreference: initialData.instructorPreference || '',
+        comments: initialData.comments || '',
+      });
     }
   }, [initialData]);
 
@@ -41,18 +47,22 @@ const NewDataForm = ({ onSubmit, initialData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Form validation
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    setErrors({});
-    const response = await onSubmit(formData);
+    const filteredFormData = { ...formData };
+    // Remove customClassType if not needed
+    if (filteredFormData.classType !== 'Other') {
+      delete filteredFormData.customClassType;
+    }
 
-    // Reset form after successful submission if not editing
-    if (response.success && !initialData) {
+    setErrors({});
+    const response = await onSubmit(filteredFormData);
+
+    if (response.success) {
       setFormData({
         classType: '',
         customClassType: '',
@@ -89,7 +99,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
           <input
             type="text"
             name="customClassType"
-            value={formData.customClassType || ''}
+            value={formData.customClassType}
             onChange={handleChange}
             placeholder="Type your class type"
           />
@@ -172,9 +182,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
             Male
           </label>
         </div>
-        {errors.instructorPreference && (
-          <span className="error">{errors.instructorPreference}</span>
-        )}
+        {errors.instructorPreference && <span className="error">{errors.instructorPreference}</span>}
       </fieldset>
 
       {/* Comments */}
@@ -189,7 +197,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
       </label>
 
       {/* Submit Button */}
-      <button type="submit">{initialData ? 'Edit Class' : 'Submit'}</button>
+      <button type="submit">{editItemId ? 'Edit Now' : 'Submit'}</button>
     </form>
   );
 };
