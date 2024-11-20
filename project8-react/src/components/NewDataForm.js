@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const NewDataForm = ({ onSubmit }) => {
+const NewDataForm = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState({
-    classType: '',  
-    preferredDayTime: '', 
-    groupType: '', 
-    instructorPreference: '', 
-    comments: '', 
+    classType: '',
+    customClassType: '',
+    preferredDayTime: '',
+    groupType: '',
+    instructorPreference: '',
+    comments: '',
   });
 
   const [errors, setErrors] = useState({});
+
+  // Populate the form with initial data when editing
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -33,7 +41,7 @@ const NewDataForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // form validation
+    // Form validation
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
@@ -43,8 +51,8 @@ const NewDataForm = ({ onSubmit }) => {
     setErrors({});
     const response = await onSubmit(formData);
 
-    // resets form after successful submission
-    if (response.success) {
+    // Reset form after successful submission if not editing
+    if (response.success && !initialData) {
       setFormData({
         classType: '',
         customClassType: '',
@@ -93,11 +101,10 @@ const NewDataForm = ({ onSubmit }) => {
       <label>
         Preferred Day/Time:
         <input
-          type="datetime-local" 
+          type="datetime-local"
           name="preferredDayTime"
           value={formData.preferredDayTime}
           onChange={handleChange}
-          required
         />
         {errors.preferredDayTime && <span className="error">{errors.preferredDayTime}</span>}
       </label>
@@ -182,7 +189,7 @@ const NewDataForm = ({ onSubmit }) => {
       </label>
 
       {/* Submit Button */}
-      <button type="submit">Submit</button>
+      <button type="submit">{initialData ? 'Edit Class' : 'Submit'}</button>
     </form>
   );
 };
