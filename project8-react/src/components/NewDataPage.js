@@ -33,8 +33,9 @@ const NewDataPage = () => {
     try {
       let response;
 
-      // Filter out the `id` field to avoid sending it
-      const { id, ...filteredData } = formData;
+      // Create a copy of formData without `id`
+      const filteredData = { ...formData };
+      delete filteredData.id;
 
       if (editItemId) {
         // Edit existing suggestion
