@@ -177,7 +177,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         )}
       </fieldset>
 
-      {/* Comments */}
+      {/* Comment */}
       <label>
         Comments:
         <textarea
@@ -195,3 +195,4 @@ const NewDataForm = ({ onSubmit, initialData }) => {
 };
 
 export default NewDataForm;
+
