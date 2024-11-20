@@ -8,7 +8,7 @@ const NewDataPage = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [dataList, setDataList] = useState([]);
   const [recentSubmission, setRecentSubmission] = useState(null);
-  const [editItem, setEditItem] = useState(null); // Track the item being edited
+  const [editItemId, setEditItemId] = useState(null); // Track the item being edited
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +32,10 @@ const NewDataPage = () => {
   const handleFormSubmit = async (formData) => {
     try {
       let response;
-      if (editItem) {
+      if (editItemId) {
         // Edit existing suggestion
         response = await fetch(
-          `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItem.id}`,
+          `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -54,20 +54,20 @@ const NewDataPage = () => {
       const result = await response.json();
 
       if (response.ok) {
-        if (editItem) {
+        if (editItemId) {
           // Update the item in the list
           setDataList((prevList) =>
-            prevList.map((item) => (item.id === editItem.id ? { ...item, ...formData } : item))
+            prevList.map((item) => (item.id === editItemId ? { ...item, ...formData } : item))
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
           // Add the new item to the list
-          setDataList((prevList) => [...prevList, result.class]);
-          setRecentSubmission(result.class);
+          setDataList((prevList) => [...prevList, result.suggestion]);
+          setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
 
-        setEditItem(null); // Clear edit state
+        setEditItemId(null); // Clear edit state
         return { success: true };
       } else {
         setServerMessage(result.message || 'Failed to submit. Try again.');
@@ -100,16 +100,13 @@ const NewDataPage = () => {
     }
   };
 
-  // Handle Edit Click
-  const handleEdit = (item) => {
-    setEditItem(item);
-    window.scrollTo(0, 0); // Scroll to the form section
-  };
-
   return (
     <div className="new-data-page">
       <h2>Suggest a New Class</h2>
-      <NewDataForm onSubmit={handleFormSubmit} initialData={editItem} />
+      <NewDataForm
+        onSubmit={handleFormSubmit}
+        initialData={editItemId ? dataList.find((item) => item.id === editItemId) : null}
+      />
       {serverMessage && <p className="server-message">{serverMessage}</p>}
 
       {/* Recap Box */}
@@ -143,10 +140,16 @@ const NewDataPage = () => {
                 <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
                 {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
                 <div className="action-buttons">
-                  <button className="edit-button" onClick={() => handleEdit(item)}>
+                  <button
+                    className="edit-button"
+                    onClick={() => setEditItemId(item.id)}
+                  >
                     Edit
                   </button>
-                  <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDelete(item.id)}
+                  >
                     Delete
                   </button>
                 </div>
