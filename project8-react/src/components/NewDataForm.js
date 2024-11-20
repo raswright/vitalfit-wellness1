@@ -54,7 +54,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     }
 
     const filteredFormData = { ...formData };
-    // Remove customClassType if not needed
     if (filteredFormData.classType !== 'Other') {
       delete filteredFormData.customClassType;
     }
@@ -76,7 +75,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Class Type */}
       <label>
         Class Type:
         <select name="classType" value={formData.classType} onChange={handleChange}>
@@ -92,14 +90,13 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         {errors.classType && <span className="error">{errors.classType}</span>}
       </label>
 
-      {/* Custom Class Type */}
       {formData.classType === 'Other' && (
         <label>
           Please Specify:
           <input
             type="text"
             name="customClassType"
-            value={formData.customClassType}
+            value={formData.customClassType || ''}
             onChange={handleChange}
             placeholder="Type your class type"
           />
@@ -107,7 +104,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         </label>
       )}
 
-      {/* Preferred Day/Time */}
       <label>
         Preferred Day/Time:
         <input
@@ -119,7 +115,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         {errors.preferredDayTime && <span className="error">{errors.preferredDayTime}</span>}
       </label>
 
-      {/* Group Type */}
       <fieldset>
         <legend>Group Type:</legend>
         <div className="radio-options">
@@ -147,7 +142,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         {errors.groupType && <span className="error">{errors.groupType}</span>}
       </fieldset>
 
-      {/* Instructor Preference */}
       <fieldset>
         <legend>Instructor Preference:</legend>
         <div className="radio-options">
@@ -185,7 +179,6 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         {errors.instructorPreference && <span className="error">{errors.instructorPreference}</span>}
       </fieldset>
 
-      {/* Comments */}
       <label>
         Comments:
         <textarea
@@ -196,8 +189,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         />
       </label>
 
-      {/* Submit Button */}
-      <button type="submit">{editItemId ? 'Edit Now' : 'Submit'}</button>
+      <button type="submit">{initialData ? 'Edit Now' : 'Submit'}</button>
     </form>
   );
 };
