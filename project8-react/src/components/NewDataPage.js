@@ -8,7 +8,7 @@ const NewDataPage = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [dataList, setDataList] = useState([]);
   const [recentSubmission, setRecentSubmission] = useState(null);
-  const [editItemId, setEditItemId] = useState(null); // Track the ID of the item being edited
+  const [editItemId, setEditItemId] = useState(null); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,17 +28,15 @@ const NewDataPage = () => {
     fetchData();
   }, []);
 
-  // Handle form submission (Add or Edit)
   const handleFormSubmit = async (formData) => {
     try {
       let response;
 
-      // Create a copy of formData without `id`
       const filteredData = { ...formData };
       delete filteredData.id;
 
       if (editItemId) {
-        // Edit existing suggestion
+
         response = await fetch(
           `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
@@ -48,7 +46,7 @@ const NewDataPage = () => {
           }
         );
       } else {
-        // Add new suggestion
+
         response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -60,20 +58,20 @@ const NewDataPage = () => {
 
       if (response.ok) {
         if (editItemId) {
-          // Update the item in the list
+  
           setDataList((prevList) =>
             prevList.map((item) => (item.id === editItemId ? { ...item, ...filteredData } : item))
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
-          // Add the new item to the list
+        
           setDataList((prevList) => [...prevList, result.suggestion]);
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
 
-        setEditItemId(null); // Clear edit state
-        setRecentSubmission(null); // Clear the form data
+        setEditItemId(null); 
+        setRecentSubmission(null); 
         return { success: true };
       } else {
         setServerMessage(result.message || 'Failed to submit. Try again.');
@@ -86,7 +84,6 @@ const NewDataPage = () => {
     }
   };
 
-  // Handle Delete
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${id}`, {
@@ -106,10 +103,9 @@ const NewDataPage = () => {
     }
   };
 
-  // Handle Edit Click
   const handleEdit = (item) => {
     setEditItemId(item.id);
-    setRecentSubmission(item); // Show the item being edited in the form
+    setRecentSubmission(item); 
   };
 
   return (

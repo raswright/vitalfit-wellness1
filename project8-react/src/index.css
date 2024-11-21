@@ -21,6 +21,11 @@
     --navy1: 0 0 8px rgba(0, 102, 204, 0.5);
     --lightgray: #ccc;
     --lightwhite: #ddd;
+    --lightlightgray:  #f9f9f9;
+    --green: #4CAF50;
+    --darkgreen: #45a049;
+    --regularred: #f44336;
+    --darkred:  #da190b;
   }
   
   /* Global Body Styles */
