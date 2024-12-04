@@ -122,35 +122,25 @@ const NewDataPage = () => {
         <h3>Submitted Class Suggestions</h3>
         {dataList.length > 0 ? (
           <div className="suggestions-grid">
-          {dataList.map((item) => (
-            <div key={item.id} className="suggestion-card">
-              <p><strong>Class Type:</strong> {item.classType}</p>
-              {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
-              <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
-              <p><strong>Group Type:</strong> {item.groupType}</p>
-              <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
-              {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
-              {item.img_name && (
-                <div>
-                  <p><strong>Image:</strong></p>
-                  <img
-                    src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
-                    alt="Uploaded Class"
-                    style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }}
-                  />
+            {dataList.map((item) => (
+              <div key={item.id} className="suggestion-card">
+                <p><strong>Class Type:</strong> {item.classType}</p>
+                {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
+                <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
+                <p><strong>Group Type:</strong> {item.groupType}</p>
+                <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
+                {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
+                <div className="action-buttons">
+                  <button className="edit-button" onClick={() => handleEdit(item)}>
+                    Edit
+                  </button>
+                  <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                    Delete
+                  </button>
                 </div>
-              )}
-              <div className="action-buttons">
-                <button className="edit-button" onClick={() => handleEdit(item)}>
-                  Edit
-                </button>
-                <button className="delete-button" onClick={() => handleDelete(item.id)}>
-                  Delete
-                </button>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         ) : (
           <p>No class suggestions submitted yet.</p>
         )}
@@ -162,6 +152,7 @@ const NewDataPage = () => {
     </div>
   );
 };
+
 
 
 export default NewDataPage;
