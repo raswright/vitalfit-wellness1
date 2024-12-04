@@ -31,26 +31,39 @@ const NewDataPage = () => {
   const handleFormSubmit = async (formData) => {
     try {
       let response;
-
+  
+      const filteredData = { ...formData };
+      delete filteredData._id; // Remove _id before sending to the server
+  
       if (editItemId) {
         // Updating existing data
+        const updatedFormData = new FormData();
+        for (const key in filteredData) {
+          updatedFormData.append(key, filteredData[key]);
+        }
+  
         response = await fetch(
           `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
             method: 'PUT',
-            body: formData, // FormData includes the file
+            body: updatedFormData,
           }
         );
       } else {
         // Creating new data
+        const newFormData = new FormData();
+        for (const key in formData) {
+          newFormData.append(key, formData[key]);
+        }
+  
         response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
           method: 'POST',
-          body: formData, // FormData includes the file
+          body: newFormData,
         });
       }
-
+  
       const result = await response.json();
-
+  
       if (response.ok) {
         if (editItemId) {
           // Update the list with the edited item
@@ -64,7 +77,7 @@ const NewDataPage = () => {
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
-
+  
         setEditItemId(null); // Clear edit mode
         setRecentSubmission(null);
         return { success: true };
@@ -77,7 +90,7 @@ const NewDataPage = () => {
       setServerMessage('An error occurred. Please try again.');
       return { success: false };
     }
-  };
+  };  
 
   const handleDelete = async (id) => {
     try {
@@ -129,10 +142,16 @@ const NewDataPage = () => {
                   <div>
                     <p><strong>Image:</strong></p>
                     <img
-                      src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
-                      alt="Uploaded Class"
-                      style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }}
-                    />
+  src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
+  alt="Uploaded Class"
+  style={{
+    width: '100%',
+    maxHeight: '200px',
+    objectFit: 'contain', // Changed 'cover' to 'contain'
+    backgroundColor: '#f0f0f0', // Optional: Adds a background color
+  }}
+/>
+
                   </div>
                 )}
                 <div className="action-buttons">
