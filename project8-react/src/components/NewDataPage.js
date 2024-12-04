@@ -8,7 +8,7 @@ const NewDataPage = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [dataList, setDataList] = useState([]);
   const [recentSubmission, setRecentSubmission] = useState(null);
-  const [editItemId, setEditItemId] = useState(null); 
+  const [editItemId, setEditItemId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,25 +32,20 @@ const NewDataPage = () => {
     try {
       let response;
 
-      const filteredData = { ...formData };
-      delete filteredData.id;
-
       if (editItemId) {
-
+        // Updating existing data
         response = await fetch(
           `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(filteredData),
+            body: formData, // FormData includes the file
           }
         );
       } else {
-
+        // Creating new data
         response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(filteredData),
+          body: formData, // FormData includes the file
         });
       }
 
@@ -58,20 +53,20 @@ const NewDataPage = () => {
 
       if (response.ok) {
         if (editItemId) {
-  
+          // Update the list with the edited item
           setDataList((prevList) =>
-            prevList.map((item) => (item.id === editItemId ? { ...item, ...filteredData } : item))
+            prevList.map((item) => (item._id === editItemId ? { ...result.suggestion } : item))
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
-        
+          // Add the new item to the list
           setDataList((prevList) => [...prevList, result.suggestion]);
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
 
-        setEditItemId(null); 
-        setRecentSubmission(null); 
+        setEditItemId(null); // Clear edit mode
+        setRecentSubmission(null);
         return { success: true };
       } else {
         setServerMessage(result.message || 'Failed to submit. Try again.');
@@ -91,7 +86,7 @@ const NewDataPage = () => {
       });
 
       if (response.ok) {
-        setDataList((prevList) => prevList.filter((item) => item.id !== id));
+        setDataList((prevList) => prevList.filter((item) => item._id !== id));
         setServerMessage('Class suggestion deleted successfully!');
       } else {
         const result = await response.json();
@@ -104,8 +99,8 @@ const NewDataPage = () => {
   };
 
   const handleEdit = (item) => {
-    setEditItemId(item.id);
-    setRecentSubmission(item); 
+    setEditItemId(item._id);
+    setRecentSubmission(item);
   };
 
   return (
@@ -123,18 +118,28 @@ const NewDataPage = () => {
         {dataList.length > 0 ? (
           <div className="suggestions-grid">
             {dataList.map((item) => (
-              <div key={item.id} className="suggestion-card">
+              <div key={item._id} className="suggestion-card">
                 <p><strong>Class Type:</strong> {item.classType}</p>
                 {item.customClassType && <p><strong>Custom Class Type:</strong> {item.customClassType}</p>}
                 <p><strong>Preferred Day/Time:</strong> {item.preferredDayTime}</p>
                 <p><strong>Group Type:</strong> {item.groupType}</p>
                 <p><strong>Instructor Preference:</strong> {item.instructorPreference}</p>
                 {item.comments && <p><strong>Comments:</strong> {item.comments}</p>}
+                {item.img_name && (
+                  <div>
+                    <p><strong>Image:</strong></p>
+                    <img
+                      src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
+                      alt="Uploaded Class"
+                      style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }}
+                    />
+                  </div>
+                )}
                 <div className="action-buttons">
                   <button className="edit-button" onClick={() => handleEdit(item)}>
                     Edit
                   </button>
-                  <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                  <button className="delete-button" onClick={() => handleDelete(item._id)}>
                     Delete
                   </button>
                 </div>
@@ -152,7 +157,5 @@ const NewDataPage = () => {
     </div>
   );
 };
-
-
 
 export default NewDataPage;

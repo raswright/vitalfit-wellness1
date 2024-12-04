@@ -8,14 +8,15 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     groupType: '',
     instructorPreference: '',
     comments: '',
+    img_name: null, // For the image upload
   });
 
   const [errors, setErrors] = useState({});
 
-  // populates form with initial data when editing
+  // Populates form with initial data when editing
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
+      setFormData({ ...initialData, img_name: null }); // Reset image when editing
     }
   }, [initialData]);
 
@@ -38,25 +39,33 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({ ...prev, img_name: e.target.files[0] })); // Store selected file
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const filteredFormData = { ...formData };
-    if (filteredFormData.classType !== 'Other') {
-        delete filteredFormData.customClassType;
-    }
 
-    // form validation
+    // Validate form
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
+    // Prepare form data
+    const filteredFormData = new FormData(); // FormData object for handling files
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null && value !== '') {
+        filteredFormData.append(key, value);
+      }
+    });
+
+    // Submit the form
     setErrors({});
     const response = await onSubmit(filteredFormData);
 
-    // reset form after successful submission if not editing
+    // Reset form after successful submission if not editing
     if (response.success && !initialData) {
       setFormData({
         classType: '',
@@ -65,12 +74,13 @@ const NewDataForm = ({ onSubmit, initialData }) => {
         groupType: '',
         instructorPreference: '',
         comments: '',
+        img_name: null,
       });
     }
-};
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       {/* Class Type */}
       <label>
         Class Type:
@@ -191,6 +201,12 @@ const NewDataForm = ({ onSubmit, initialData }) => {
           onChange={handleChange}
           placeholder="Any additional details or reasons"
         />
+      </label>
+
+      {/* Image Upload */}
+      <label>
+        Upload Image:
+        <input type="file" name="img_name" accept="image/*" onChange={handleFileChange} />
       </label>
 
       {/* Submit Button */}
