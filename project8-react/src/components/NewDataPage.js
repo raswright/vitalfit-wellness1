@@ -28,37 +28,33 @@ const NewDataPage = () => {
     fetchData();
   }, []);
 
+  
   const handleFormSubmit = async (formData) => {
     try {
       let response;
   
-      const filteredData = { ...formData };
-      delete filteredData._id; // Remove _id before sending to the server
-  
       if (editItemId) {
-        // Updating existing data
-        const updatedFormData = new FormData();
-        for (const key in filteredData) {
-          updatedFormData.append(key, filteredData[key]);
+        // Exclude `_id` and `__v` when editing
+        const filteredData = new FormData();
+        for (const [key, value] of formData.entries()) {
+          if (key !== '_id' && key !== '__v') {
+            filteredData.append(key, value);
+          }
         }
   
+        // PUT request for editing
         response = await fetch(
           `https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${editItemId}`,
           {
             method: 'PUT',
-            body: updatedFormData,
+            body: filteredData,
           }
         );
       } else {
-        // Creating new data
-        const newFormData = new FormData();
-        for (const key in formData) {
-          newFormData.append(key, formData[key]);
-        }
-  
+        // POST request for creating new data
         response = await fetch('https://vitalfit-wellness-server.onrender.com/api/class-suggestions', {
           method: 'POST',
-          body: newFormData,
+          body: formData,
         });
       }
   
@@ -66,19 +62,19 @@ const NewDataPage = () => {
   
       if (response.ok) {
         if (editItemId) {
-          // Update the list with the edited item
           setDataList((prevList) =>
-            prevList.map((item) => (item._id === editItemId ? { ...result.suggestion } : item))
+            prevList.map((item) =>
+              item._id === editItemId ? { ...result.suggestion } : item
+            )
           );
           setServerMessage('Class suggestion updated successfully!');
         } else {
-          // Add the new item to the list
           setDataList((prevList) => [...prevList, result.suggestion]);
           setRecentSubmission(result.suggestion);
           setServerMessage('Class suggestion submitted successfully!');
         }
   
-        setEditItemId(null); // Clear edit mode
+        setEditItemId(null);
         setRecentSubmission(null);
         return { success: true };
       } else {
@@ -90,7 +86,8 @@ const NewDataPage = () => {
       setServerMessage('An error occurred. Please try again.');
       return { success: false };
     }
-  };  
+  };
+  
 
   const handleDelete = async (id) => {
     try {
@@ -151,7 +148,6 @@ const NewDataPage = () => {
     backgroundColor: '#f0f0f0', // Optional: Adds a background color
   }}
 />
-
                   </div>
                 )}
                 <div className="action-buttons">
