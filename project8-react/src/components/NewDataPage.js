@@ -34,7 +34,7 @@ const NewDataPage = () => {
       let response;
   
       if (editItemId) {
-        // Exclude `_id` and `__v` when editing
+        // exclude _id and __v when editing
         const filteredData = new FormData();
         for (const [key, value] of formData.entries()) {
           if (key !== '_id' && key !== '__v') {
@@ -88,7 +88,6 @@ const NewDataPage = () => {
     }
   };
   
-
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`https://vitalfit-wellness-server.onrender.com/api/class-suggestions/${id}`, {
@@ -139,16 +138,17 @@ const NewDataPage = () => {
                   <div>
                     <p><strong>Image:</strong></p>
                     <img
-  src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
-  alt="Uploaded Class"
-  style={{
-    width: '100%',
-    maxHeight: '200px',
-    objectFit: 'contain', // Changed 'cover' to 'contain'
-    backgroundColor: '#f0f0f0', // Optional: Adds a background color
-  }}
-/>
-                  </div>
+                    src={`https://vitalfit-wellness-server.onrender.com/images/${item.img_name}`}
+                    alt="Uploaded Class"
+                    style={{
+                    width: '100%',
+                    maxHeight: '200px',
+                    objectFit: 'contain', 
+                    backgroundColor: '#f0f0f0', 
+                  }}
+                />
+            </div>
+
                 )}
                 <div className="action-buttons">
                   <button className="edit-button" onClick={() => handleEdit(item)}>

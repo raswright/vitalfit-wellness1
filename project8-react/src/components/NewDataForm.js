@@ -8,15 +8,15 @@ const NewDataForm = ({ onSubmit, initialData }) => {
     groupType: '',
     instructorPreference: '',
     comments: '',
-    img_name: null, // For the image upload
+    img_name: null, 
   });
 
   const [errors, setErrors] = useState({});
 
-  // Populates form with initial data when editing
+  // populates form with initial data when editing
   useEffect(() => {
     if (initialData) {
-      setFormData({ ...initialData, img_name: null }); // Reset image when editing
+      setFormData({ ...initialData, img_name: null }); // resets image
     }
   }, [initialData]);
 
@@ -40,7 +40,7 @@ const NewDataForm = ({ onSubmit, initialData }) => {
   };
 
   const handleFileChange = (e) => {
-    setFormData((prev) => ({ ...prev, img_name: e.target.files[0] })); // Store selected file
+    setFormData((prev) => ({ ...prev, img_name: e.target.files[0] })); 
   };
 
   const handleSubmit = async (e) => {
@@ -53,19 +53,17 @@ const NewDataForm = ({ onSubmit, initialData }) => {
       return;
     }
 
-    // Prepare form data
-    const filteredFormData = new FormData(); // FormData object for handling files
+    const filteredFormData = new FormData(); 
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null && value !== '') {
         filteredFormData.append(key, value);
       }
     });
 
-    // Submit the form
     setErrors({});
     const response = await onSubmit(filteredFormData);
 
-    // Reset form after successful submission if not editing
+    // reset form after successful submission (when not editing)
     if (response.success && !initialData) {
       setFormData({
         classType: '',

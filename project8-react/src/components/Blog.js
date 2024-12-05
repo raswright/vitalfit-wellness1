@@ -86,30 +86,7 @@ const Blog = () => {
         <div className="load-more">
           <button>Load More</button>
         </div>
-
-        {/* Interactive Quiz Section */}
-        <section className="interactive-quiz">
-          <h2>What's Your Favorite Fitness Activity?</h2>
-          <form id="fitness-quiz">
-            <input type="radio" id="yoga" name="activity" value="yoga" />
-            <label htmlFor="yoga">Yoga</label>
-            <br />
-            <input type="radio" id="running" name="activity" value="running" />
-            <label htmlFor="running">Running</label>
-            <br />
-            <input type="radio" id="cycling" name="activity" value="cycling" />
-            <label htmlFor="cycling">Cycling</label>
-            <br />
-            <input type="radio" id="strength" name="activity" value="strength" />
-            <label htmlFor="strength">Strength Training</label>
-            <br />
-            <input type="radio" id="zumba" name="activity" value="zumba" />
-            <label htmlFor="zumba">Zumba</label>
-            <br />
-            <button type="submit">Submit</button>
-          </form>
-          <div id="quiz-result"></div>
-        </section>
+        
       </main>
     </div>
   );
